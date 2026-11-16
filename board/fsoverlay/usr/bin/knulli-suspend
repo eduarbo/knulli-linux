@@ -4,6 +4,16 @@ WAKE_TIME="/var/run/rtc-wake.epoch"
 SHUTDOWN_FLAG="/var/run/shutdown.flag"
 IDLE_STATE_FILE="/var/run/idle.state"
 LOCK_FILE="/var/run/knulli-suspend.lock"
+LOG_FILE="/var/log/knulli-suspend.log"
+
+# Power off after this long suspended (system.suspend.shutdowntimer, seconds,
+# 0 = never). Unset means 3 h: suspended, an RG35XX-H loses about 5.5 % per
+# hour, and DraStic could no longer get video memory after 5.5 h suspended.
+DEFAULT_SUSPEND_TIMER=10800
+# Also power off before the charge falls below this level while suspended
+# (system.suspend.shutdownbattery, percent, 0 = off), at 6 % per hour.
+DEFAULT_SUSPEND_BATTERY=5
+SECS_PER_PERCENT=600
 
 exec 9>"${LOCK_FILE}"
 if ! flock -n 9; then
@@ -51,6 +61,22 @@ arm_rtcs() {
   [ "$armed" -eq 1 ]  # returns 0 if at least one armed, 1 otherwise
 }
 
+log() {
+  echo "$(date -u +%FT%TZ) $*" >> "$LOG_FILE" 2>/dev/null
+}
+
+# Knulli's own shutdown (power menu, long press) closes a running game with
+# SIGTERM so it can save. Whatever the battery saver paused has to run again
+# first, or it cannot act on that signal.
+graceful_shutdown() {
+  for pid in $(ps -eo pid,ni | awk '$2==-4 {print $1}'); do
+    kill -CONT "$pid" 2>/dev/null
+  done
+  /etc/init.d/S31emulationstation resume >/dev/null 2>&1
+
+  knulli-shutdown -s
+}
+
 check_auto_shutdown() {
   [ -f "$WAKE_TIME" ] || return 0
   read -r recorded < "$WAKE_TIME" 2>/dev/null || recorded=""
@@ -62,7 +88,8 @@ check_auto_shutdown() {
   diff=$(( now - recorded ))
   [ "$diff" -lt 0 ] && diff=$(( -diff ))
   if [ "$diff" -le 10 ]; then
-    knulli-shutdown -s
+    log "woken by the shutdown alarm: shutting down"
+    graceful_shutdown
   fi
 }
 
@@ -109,15 +136,87 @@ check_idle_modes() {
   return 1
 }
 
+# A non-negative integer setting, or the default when unset or invalid
+setting_number() {
+  local VALUE
+
+  VALUE="$(/usr/bin/knulli-settings-get "$1" 2>/dev/null)"
+  case "$VALUE" in
+    ''|*[!0-9]*) VALUE="$2" ;;
+  esac
+  printf '%s' "$VALUE"
+}
+
+check_suspend_timer() {
+  local TIMER
+
+  TIMER="$(setting_number system.suspend.shutdowntimer "$DEFAULT_SUSPEND_TIMER")"
+  [ "$TIMER" -gt 0 ] || return 1
+  printf '%s' "$TIMER"
+}
+
+# Seconds until the battery would reach the floor; nothing on external power
+check_battery_timer() {
+  local FLOOR
+  local CAPACITY=""
+  local STATUS=""
+  local SECS
+
+  FLOOR="$(setting_number system.suspend.shutdownbattery "$DEFAULT_SUSPEND_BATTERY")"
+  [ "$FLOOR" -gt 0 ] || return 1
+
+  for supply in /sys/class/power_supply/*; do
+    [ "$(cat "$supply/type" 2>/dev/null)" = "Battery" ] || continue
+    read -r CAPACITY < "$supply/capacity" 2>/dev/null
+    read -r STATUS < "$supply/status" 2>/dev/null
+    break
+  done
+
+  [ "$STATUS" = "Discharging" ] || return 1
+  case "$CAPACITY" in
+    ''|*[!0-9]*) return 1 ;;
+  esac
+
+  SECS=$(( (CAPACITY - FLOOR) * SECS_PER_PERCENT ))
+  [ "$SECS" -ge 300 ] || SECS=300
+  printf '%s' "$SECS"
+}
+
+# "<seconds> <reason>" for the soonest shutdown timer, if any
+get_shutdown_plan() {
+  local PLAN=""
+  local SECS
+
+  if SECS="$(check_idle_modes)"; then
+    PLAN="$SECS battery-saver"
+  fi
+  if SECS="$(check_suspend_timer)"; then
+    if [ -z "$PLAN" ] || [ "$SECS" -lt "${PLAN%% *}" ]; then
+      PLAN="$SECS suspend-timer"
+    fi
+  fi
+  if SECS="$(check_battery_timer)"; then
+    if [ -z "$PLAN" ] || [ "$SECS" -lt "${PLAN%% *}" ]; then
+      PLAN="$SECS low-battery"
+    fi
+  fi
+
+  [ -n "$PLAN" ] || return 1
+  printf '%s' "$PLAN"
+}
+
 RTC_TIMER=""
 
-if rtc_secs="$(check_idle_modes)"; then
+if rtc_plan="$(get_shutdown_plan)"; then
+  rtc_secs="${rtc_plan%% *}"
   clear_rtcs
   if arm_rtcs "$rtc_secs"; then
     RTC_TIMER="$rtc_secs"
     save_time "$RTC_TIMER"
+    log "suspend: shutdown alarm in ${rtc_secs}s (${rtc_plan#* })"
   else
     rm -f "$WAKE_TIME" 2>/dev/null
+    log "suspend: could not arm an RTC alarm"
   fi
 else
   clear_rtcs
