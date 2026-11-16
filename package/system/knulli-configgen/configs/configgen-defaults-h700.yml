@@ -31,6 +31,75 @@ naomi:
 n64:
   emulator: libretro
   core:     parallel_n64
+  # Measured on an RG35XX-H with boot tests, not playthroughs: games that
+  # crash, exit or hang on parallel_n64 and boot on mupen64plus-next (most of
+  # the list), plus a few that run at full speed only on mupen64plus-next or
+  # with the rice plugin. knulli.conf settings still take precedence.
+  games:
+    "All-Star Baseball 99":                       { core: mupen64plus-next }
+    "Army Men - Air Combat":                      { core: mupen64plus-next }
+    "Army Men - Sarge's Heroes":                  { core: mupen64plus-next }
+    "Army Men - Sarge's Heroes 2":                { core: mupen64plus-next }
+    "Banjo-Kazooie":                              { core: mupen64plus-next }
+    "BattleTanx - Global Assault":                { core: mupen64plus-next }
+    "Bomberman 64 - Arcade Edition":              { core: mupen64plus-next }
+    "Conker's Bad Fur Day":                       { core: mupen64plus-next }
+    "Cruis'n Exotica":                            { core: mupen64plus-next }
+    "Densha de Go! 64":                           { core: mupen64plus-next }
+    "Diddy Kong Racing":                          { core: mupen64plus-next }
+    "Dr. Mario 64":                               { core: mupen64plus-next }
+    "Duke Nukem - Zero Hour":                     { core: mupen64plus-next }
+    "Fighter Destiny 2":                          { core: mupen64plus-next }
+    "Gauntlet Legends":                           { core: mupen64plus-next }
+    "Gex 3 - Deep Cover Gecko":                   { core: mupen64plus-next }
+    "GoldenEye 007":                              { core: mupen64plus-next }
+    "GoldenEye 007 - All Unlockables":            { core: mupen64plus-next }
+    "GoldenEye X":                                { core: mupen64plus-next }
+    "Hey You, Pikachu!":                          { core: mupen64plus-next }
+    "Hot Wheels Turbo Racing":                    { core: mupen64plus-next }
+    "Indiana Jones and the Infernal Machine":     { core: mupen64plus-next }
+    "J.League Live 64":                           { core: mupen64plus-next }
+    "Ken Griffey Jr.'s Slugfest":                 { core: mupen64plus-next }
+    "Killer Instinct Gold":                       { core: mupen64plus-next }
+    "Last Legion UX":                             { core: mupen64plus-next }
+    "Legend of Zelda, The - Majora's Mask":       { options: { parallel-n64-gfxplugin: rice } }
+    "Mario Golf":                                 { core: mupen64plus-next }
+    "Mario Kart 64":                              { options: { parallel-n64-gfxplugin: rice } }
+    "Mario Kart 64 - Amped Up":                   { core: mupen64plus-next }
+    "Mario Tennis":                               { core: mupen64plus-next }
+    "Mega Man 64":                                { core: mupen64plus-next }
+    "Namco Museum 64":                            { core: mupen64plus-next }
+    "NBA Jam 2000":                               { core: mupen64plus-next }
+    "NBA Jam 99":                                 { core: mupen64plus-next }
+    "NFL Blitz":                                  { core: mupen64plus-next }
+    "NFL Blitz 2000":                             { core: mupen64plus-next }
+    "NFL Quarterback Club 98":                    { core: mupen64plus-next }
+    "Nuclear Strike 64":                          { core: mupen64plus-next }
+    "Ogre Battle 64 - Person of Lordly Caliber":  { core: mupen64plus-next }
+    "Perfect Dark":                               { core: mupen64plus-next }
+    "Puyo Puyo Sun 64":                           { core: mupen64plus-next }
+    "Quake II":                                   { core: mupen64plus-next }
+    "Ready 2 Rumble Boxing":                      { core: mupen64plus-next }
+    "Ready 2 Rumble Boxing - Round 2":            { core: mupen64plus-next }
+    "Road Rash 64":                               { core: mupen64plus-next }
+    "San Francisco Rush - Extreme Racing":        { core: mupen64plus-next }
+    "Shadowgate 64 - Trials of the Four Towers":  { core: mupen64plus-next }
+    "Star Wars - Rogue Squadron":                 { core: mupen64plus-next }
+    "Star Wars Episode I - Battle for Naboo":     { core: mupen64plus-next }
+    "Stunt Racer 64":                             { core: mupen64plus-next }
+    "Super Mario 64":                             { options: { parallel-n64-gfxplugin: rice } }
+    "Tigger's Honey Hunt":                        { core: mupen64plus-next }
+    "Tom Clancy's Rainbow Six":                   { core: mupen64plus-next }
+    "Top Gear Rally 2":                           { core: mupen64plus-next }
+    "Vigilante 8 - 2nd Offense":                  { core: mupen64plus-next }
+    "Virtual Pro Wrestling 2 - Freem Edition":    { core: mupen64plus-next }
+    "Virtual Pro Wrestling 2 - Oudou Keishou":    { core: mupen64plus-next }
+    "Wave Race 64":                               { options: { parallel-n64-gfxplugin: rice } }
+    "WCW-nWo Revenge":                            { core: mupen64plus-next }
+    "WinBack - Covert Operations":                { core: mupen64plus-next }
+    "World Driver Championship":                  { core: mupen64plus-next }
+    "WWF No Mercy":                               { core: mupen64plus-next }
+    "WWF WrestleMania 2000":                      { core: mupen64plus-next }
 n64dd:
   emulator: libretro
   core:     parallel_n64
