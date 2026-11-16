@@ -1,4 +1,5 @@
 import os
+import re
 from pathlib import Path
 import xml.etree.ElementTree as ET
 import yaml
@@ -18,7 +19,8 @@ class Emulator():
         self.config = Emulator.get_system_config(
             self.name,
             DEFAULTS_DIR / "configgen-defaults.yml",
-            DEFAULTS_DIR / "configgen-defaults-arch.yml"
+            DEFAULTS_DIR / "configgen-defaults-arch.yml",
+            rom
         )
         if "emulator" not in self.config or self.config["emulator"] == "":
             eslog.error("no emulator defined. exiting.")
@@ -153,8 +155,26 @@ class Emulator():
         return dict_all
 
     @staticmethod
-    def get_system_config(system: str, defaultyml: Path, defaultarchyml: Path):
+    def game_title_key(name: str) -> str:
+        # "GoldenEye 007 (USA) (Rev 1)" and "Goldeneye 007 (U) [!]" both give
+        # "goldeneye 007": the title without its region/revision/dump tags
+        title = re.sub(r"\([^)]*\)|\[[^\]]*\]", "", name)
+        return " ".join(title.split()).casefold()
+
+    @staticmethod
+    def get_system_config(system: str, defaultyml: Path, defaultarchyml: Path, rom: str | None = None):
         dict_all = Emulator.get_generic_config(system, defaultyml, defaultarchyml)
+
+        # per-game defaults ("games" in the yml, keyed by title), for example
+        # a game that crashes on the board's default core; knulli.conf still wins
+        games = dict_all.pop("games", None)
+        if games and rom:
+            title = Emulator.game_title_key(Path(rom).stem)
+            for game, game_defaults in games.items():
+                if isinstance(game_defaults, dict) and Emulator.game_title_key(game) == title:
+                    eslog.info(f"using the defaults for {game}")
+                    Emulator.dict_merge(dict_all, game_defaults)
+                    break
 
         # options are in the yaml, not in the system structure
         # it is flat in the knulli.conf which is easier for the end user, but i prefer not flat in the yml files
