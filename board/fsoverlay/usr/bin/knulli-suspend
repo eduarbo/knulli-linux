@@ -6,14 +6,17 @@ IDLE_STATE_FILE="/var/run/idle.state"
 LOCK_FILE="/var/run/knulli-suspend.lock"
 LOG_FILE="/var/log/knulli-suspend.log"
 
-# Power off after this long suspended (system.suspend.shutdowntimer, seconds,
-# 0 = never). Unset means 3 h: suspended, an RG35XX-H loses about 5.5 % per
-# hour, and DraStic could no longer get video memory after 5.5 h suspended.
+# Power off after this long suspended on battery (system.suspend.shutdowntimer,
+# seconds, 0 = never), unless a game other than RetroArch is open. Unset
+# means 3 h: suspended, an RG35XX-H loses about 5.5 % per hour, and DraStic
+# could no longer get video memory after 5.5 h suspended.
 DEFAULT_SUSPEND_TIMER=10800
-# Also power off before the charge falls below this level while suspended
+# On battery, always power off before the charge falls below this level
 # (system.suspend.shutdownbattery, percent, 0 = off), at 6 % per hour.
 DEFAULT_SUSPEND_BATTERY=5
 SECS_PER_PERCENT=600
+# Processes that mean a game is open (emulators also run at nice -4)
+GAME_PROCESSES="retroarch drastic advanced_drastic flycast mupen64plus PPSSPPSDL gzdoom eduke32 grout pico8 pico8_64"
 
 exec 9>"${LOCK_FILE}"
 if ! flock -n 9; then
@@ -88,7 +91,7 @@ check_auto_shutdown() {
   diff=$(( now - recorded ))
   [ "$diff" -lt 0 ] && diff=$(( -diff ))
   if [ "$diff" -le 10 ]; then
-    log "woken by the shutdown alarm: shutting down"
+    log "woken by the shutdown alarm ($(cat "$WAKE_TIME.reason" 2>/dev/null)): shutting down"
     graceful_shutdown
   fi
 }
@@ -147,57 +150,80 @@ setting_number() {
   printf '%s' "$VALUE"
 }
 
-check_suspend_timer() {
-  local TIMER
-
-  TIMER="$(setting_number system.suspend.shutdowntimer "$DEFAULT_SUSPEND_TIMER")"
-  [ "$TIMER" -gt 0 ] || return 1
-  printf '%s' "$TIMER"
-}
-
-# Seconds until the battery would reach the floor; nothing on external power
-check_battery_timer() {
-  local FLOOR
-  local CAPACITY=""
-  local STATUS=""
-  local SECS
-
-  FLOOR="$(setting_number system.suspend.shutdownbattery "$DEFAULT_SUSPEND_BATTERY")"
-  [ "$FLOOR" -gt 0 ] || return 1
-
+# "<capacity> <status>" of the first battery
+battery_state() {
   for supply in /sys/class/power_supply/*; do
     [ "$(cat "$supply/type" 2>/dev/null)" = "Battery" ] || continue
-    read -r CAPACITY < "$supply/capacity" 2>/dev/null
-    read -r STATUS < "$supply/status" 2>/dev/null
-    break
+    printf '%s %s' "$(cat "$supply/capacity" 2>/dev/null)" "$(cat "$supply/status" 2>/dev/null)"
+    return 0
   done
-
-  [ "$STATUS" = "Discharging" ] || return 1
-  case "$CAPACITY" in
-    ''|*[!0-9]*) return 1 ;;
-  esac
-
-  SECS=$(( (CAPACITY - FLOOR) * SECS_PER_PERCENT ))
-  [ "$SECS" -ge 300 ] || SECS=300
-  printf '%s' "$SECS"
+  return 1
 }
 
-# "<seconds> <reason>" for the soonest shutdown timer, if any
+# What a shutdown would close: none, retroarch (it saves SRAM and its auto
+# state when it quits on SIGTERM) or other (no save it makes on quit is known)
+running_game() {
+  local NAMES
+
+  NAMES="$(ps -eo ni=,comm= 2>/dev/null | awk '$1 == -4 {print $2}')"
+  for name in $GAME_PROCESSES; do
+    pidof "$name" >/dev/null 2>&1 && NAMES="$NAMES $name"
+  done
+  if [ -z "$(echo $NAMES)" ]; then
+    if pgrep -f '[e]mulatorlauncher' >/dev/null 2>&1; then
+      echo other
+    else
+      echo none
+    fi
+    return 0
+  fi
+  for name in $NAMES; do
+    [ "$name" = retroarch ] || { echo other; return 0; }
+  done
+  echo retroarch
+}
+
+# "<seconds> <rule>" for the soonest shutdown alarm, if any
 get_shutdown_plan() {
   local PLAN=""
   local SECS
+  local BATTERY
+  local CAPACITY
+  local STATUS
+  local TIMER
+  local FLOOR
+  local GAME
 
   if SECS="$(check_idle_modes)"; then
-    PLAN="$SECS battery-saver"
+    PLAN="$SECS battery saver"
   fi
-  if SECS="$(check_suspend_timer)"; then
-    if [ -z "$PLAN" ] || [ "$SECS" -lt "${PLAN%% *}" ]; then
-      PLAN="$SECS suspend-timer"
+
+  BATTERY="$(battery_state)" || BATTERY=""
+  CAPACITY="${BATTERY%% *}"
+  STATUS="${BATTERY#* }"
+  if [ "$STATUS" != "Discharging" ]; then
+    log "suspend: no suspend timer or battery floor (battery: ${STATUS:-none})"
+  else
+    TIMER="$(setting_number system.suspend.shutdowntimer "$DEFAULT_SUSPEND_TIMER")"
+    if [ "$TIMER" -gt 0 ]; then
+      GAME="$(running_game)"
+      if [ "$GAME" = other ]; then
+        log "suspend: no suspend timer, the open game may not save when closed"
+      elif [ -z "$PLAN" ] || [ "$TIMER" -lt "${PLAN%% *}" ]; then
+        PLAN="$TIMER suspend timer, game: $GAME"
+      fi
     fi
-  fi
-  if SECS="$(check_battery_timer)"; then
-    if [ -z "$PLAN" ] || [ "$SECS" -lt "${PLAN%% *}" ]; then
-      PLAN="$SECS low-battery"
+
+    FLOOR="$(setting_number system.suspend.shutdownbattery "$DEFAULT_SUSPEND_BATTERY")"
+    case "$CAPACITY" in
+      ''|*[!0-9]*) FLOOR=0 ;;
+    esac
+    if [ "$FLOOR" -gt 0 ]; then
+      SECS=$(( (CAPACITY - FLOOR) * SECS_PER_PERCENT ))
+      [ "$SECS" -ge 300 ] || SECS=300
+      if [ -z "$PLAN" ] || [ "$SECS" -lt "${PLAN%% *}" ]; then
+        PLAN="$SECS battery floor, ${CAPACITY}% now"
+      fi
     fi
   fi
 
@@ -213,6 +239,7 @@ if rtc_plan="$(get_shutdown_plan)"; then
   if arm_rtcs "$rtc_secs"; then
     RTC_TIMER="$rtc_secs"
     save_time "$RTC_TIMER"
+    echo "${rtc_plan#* }" > "$WAKE_TIME.reason"
     log "suspend: shutdown alarm in ${rtc_secs}s (${rtc_plan#* })"
   else
     rm -f "$WAKE_TIME" 2>/dev/null
@@ -228,6 +255,7 @@ pm-is-supported --suspend >/dev/null 2>&1 && pm-suspend
 clear_rtcs # Make sure any timers are cleared after suspending
 
 check_auto_shutdown
+rm -f "$WAKE_TIME.reason"
 
 sleep 0.5 # For a small debounce
 
