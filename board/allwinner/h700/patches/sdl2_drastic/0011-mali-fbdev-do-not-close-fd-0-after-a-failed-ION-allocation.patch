@@ -1,0 +1,25 @@
+mali-fbdev: do not close fd 0 after a failed ION allocation
+
+The window data is calloc()ed, so every surface starts with dmabuf_fd 0.
+When the ION allocation fails (seen on the RG35XX-H after a long suspend:
+ION_IOC_ALLOC returns EPERM, "platform cma: Fail to allocate buffer"),
+MALI_EGL_DeinitPixmapSurfaces() treats those surfaces as allocated and
+close()s fd 0. DraStic then opens the ROM as fd 0 and reports "could not
+find entry in file" for every game. Mark the surfaces as unallocated.
+
+diff --git a/src/video/mali-fbdev/SDL_malivideo.c b/src/video/mali-fbdev/SDL_malivideo.c
+index 5fe9db6..5ceb22b 100644
+--- a/src/video/mali-fbdev/SDL_malivideo.c
++++ b/src/video/mali-fbdev/SDL_malivideo.c
+@@ -430,6 +430,11 @@ MALI_CreateWindow(_THIS, SDL_Window * window)
+     /* Setup driver data for this window */
+     window->driverdata = windowdata;
+ 
++    /* No ION buffer yet: a failed setup must not make the teardown close fd 0 */
++    for (int i = 0; i < SDL_arraysize(windowdata->surface); i++) {
++        windowdata->surface[i].dmabuf_fd = -1;
++    }
++
+     /* Use the entire screen when the blitter isn't enabled or the selected
+        resolution doesn't make any sense. */
+     if ((displaydata->blitter == NULL) || (window->w < 32 || window->h < 32)) {
