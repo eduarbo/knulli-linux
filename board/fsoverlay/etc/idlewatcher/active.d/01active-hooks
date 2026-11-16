@@ -16,9 +16,9 @@ MUTE="$(/usr/bin/knulli-settings-get system.batterysaver.mute)"
 SAVER="/usr/bin/knulli-aggressive-saver"
 
 undo_aggressive() {
+  # A failed "off" (lock not free) falls through to the stock undo below
   if [ -x "$SAVER" ]; then
-    "$SAVER" off
-    return
+    "$SAVER" off && return
   fi
 
   # Pause emulator processes (we set to -4 niceness so this is easy to target)

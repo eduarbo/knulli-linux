@@ -16,6 +16,11 @@
 # on; /var/run/emulationstation.suspended (ES process group) while ES is
 # stopped; /var/run/battery-saver/holds/NAME (holder PID) per hold. A hold
 # whose PID is gone is dropped.
+#
+# ES is stopped only by a detached worker (_freeze): never from a process
+# that may be in ES's process group (a tool started by a game hook would stop
+# itself) and never while holding the lock (a stopped lock holder would block
+# "off"). "off" resumes everything even when it cannot get the lock.
 R="${UNIT_ROOT:-}"
 STATE_DIR="$R/var/run/battery-saver"
 LOCK_FILE="$STATE_DIR/aggressive.lock"
@@ -27,6 +32,7 @@ ES_FLAG="$R/var/run/emulationstation.suspended"
 ES_INIT="$R/etc/init.d/S31emulationstation"
 CPU_DIR="$R/sys/devices/system/cpu"
 LOG="$R/var/log/battery-saver.log"
+LOCK_WAIT="${SAVER_LOCK_WAIT:-10}"
 
 mkdir -p "$STATE_DIR" "$HOLD_DIR"
 
@@ -34,9 +40,10 @@ log() {
     echo "$(date -u +%FT%TZ) $*" >> "$LOG" 2>/dev/null
 }
 
+# locked FUNCTION ARGS: run under the lock; 75 when the lock is not free
 locked() {
     (
-        flock -w 10 200 || exit 1
+        flock -w "$LOCK_WAIT" 200 || exit 75
         "$@"
     ) 200>"$LOCK_FILE"
 }
@@ -47,6 +54,12 @@ check_pause() {
 
 es_pid() {
     pidof emulationstation 2>/dev/null | awk '{print $1}'
+}
+
+es_pgid() {
+    local pid
+    pid=$(es_pid)
+    [ -n "$pid" ] && ps -o pgid= -p "$pid" | tr -d ' '
 }
 
 has_holds() {
@@ -63,26 +76,9 @@ has_holds() {
     return 1
 }
 
-freeze_es() {
-    local pid pgid
-    [ -f "$ES_FLAG" ] && return 0
-    pid=$(es_pid)
-    [ -n "$pid" ] || return 0
-    pgid=$(ps -o pgid= -p "$pid" | tr -d ' ')
-    [ -n "$pgid" ] || return 0
-    echo "$pgid" > "$ES_FLAG"
-    "$ES_INIT" suspend >/dev/null 2>&1
-    log "EmulationStation stopped (process group $pgid)"
-}
-
-# Only the ES process: a paused game in the same process group stays paused
-thaw_es() {
-    local pid
-    [ -f "$ES_FLAG" ] || return 0
-    pid=$(es_pid)
-    [ -n "$pid" ] && kill -CONT "$pid" 2>/dev/null
-    rm -f "$ES_FLAG"
-    log "EmulationStation running for a hold"
+# Start the freezer outside this process group, session and lock
+spawn_freeze() {
+    setsid "$0" _freeze </dev/null >/dev/null 2>&1 200>&- &
 }
 
 save_and_set_governor() {
@@ -109,6 +105,15 @@ restore_governor() {
     rm -f "$GOVERNOR_SAVED"
 }
 
+# SIGCONT is harmless to repeat: ES's group, every nice -4 process
+resume_everything() {
+    local pid
+    "$ES_INIT" resume >/dev/null 2>&1
+    for pid in $(ps -eo pid,ni | awk '$2==-4 {print $1}'); do
+        kill -CONT "$pid" 2>/dev/null
+    done
+}
+
 do_on() {
     local pid
     [ -f "$ACTIVE_FILE" ] && return 0
@@ -120,12 +125,7 @@ do_on() {
     for pid in $(ps -eo pid,ni | awk '$2==-4 {print $1}'); do
         kill -STOP "$pid" 2>/dev/null && echo "$pid" >> "$STOPPED_PIDS"
     done
-    if has_holds; then
-        log "saver on; EmulationStation kept running for a hold"
-    else
-        freeze_es
-        log "saver on"
-    fi
+    log "saver on"
 }
 
 do_off() {
@@ -135,10 +135,7 @@ do_off() {
         # unit was installed): resume like the stock active hook does
         pid=$(es_pid)
         if [ -n "$pid" ] && [ "$(ps -o stat= -p "$pid" | cut -c1)" = T ]; then
-            for pid in $(ps -eo pid,ni | awk '$2==-4 {print $1}'); do
-                kill -CONT "$pid" 2>/dev/null
-            done
-            "$ES_INIT" resume >/dev/null 2>&1
+            resume_everything
             rm -f "$ES_FLAG"
             log "resumed a freeze made without the saver"
         fi
@@ -158,25 +155,61 @@ do_off() {
 }
 
 do_hold() {
+    local pid
     echo "$2" > "$HOLD_DIR/$1"
-    [ -f "$ACTIVE_FILE" ] && thaw_es
+    if [ -f "$ACTIVE_FILE" ]; then
+        # Only the ES process: a paused game in its group stays paused
+        pid=$(es_pid)
+        [ -n "$pid" ] && kill -CONT "$pid" 2>/dev/null
+        rm -f "$ES_FLAG"
+    fi
     return 0
 }
 
 do_release() {
     rm -f "$HOLD_DIR/$1"
-    if [ -f "$ACTIVE_FILE" ] && ! has_holds; then
-        freeze_es
-    fi
-    return 0
 }
 
-# A tool that died while holding: freeze again once its hold is gone
-do_reconcile() {
-    if [ -f "$ACTIVE_FILE" ] && [ ! -f "$ES_FLAG" ] && ! has_holds; then
-        freeze_es
+# _freeze, under the lock: should ES be stopped now? Marks it first.
+plan_freeze() {
+    local pgid
+    [ -f "$ACTIVE_FILE" ] || return 1
+    [ -f "$ES_FLAG" ] && return 1
+    has_holds && return 1
+    pgid=$(es_pgid)
+    [ -n "$pgid" ] || return 1
+    if [ "$pgid" = "$(ps -o pgid= -p "$BASHPID" | tr -d ' ')" ]; then
+        log "not stopping EmulationStation from inside its own process group"
+        return 1
     fi
-    return 0
+    echo "$pgid" > "$ES_FLAG"
+}
+
+# _freeze, under the lock again: undo the stop if a hold or "off" came in
+confirm_freeze() {
+    local pid
+    if [ -f "$ACTIVE_FILE" ] && ! has_holds; then
+        [ -f "$ES_FLAG" ] || echo "$1" > "$ES_FLAG"
+        log "EmulationStation stopped (process group $1)"
+        return 0
+    fi
+    if [ -f "$ACTIVE_FILE" ]; then
+        pid=$(es_pid)
+        [ -n "$pid" ] && kill -CONT "$pid" 2>/dev/null
+    else
+        "$ES_INIT" resume >/dev/null 2>&1
+    fi
+    rm -f "$ES_FLAG"
+    log "EmulationStation stop undone: the saver went off or a hold came in"
+}
+
+do_freeze() {
+    local pgid
+    locked plan_freeze || return 0
+    pgid=$(cat "$ES_FLAG" 2>/dev/null)
+    [ -n "$pgid" ] || return 0   # "off" or a hold came in already
+    "$ES_INIT" suspend >/dev/null 2>&1
+    locked confirm_freeze "$pgid"
 }
 
 valid_name() {
@@ -187,13 +220,23 @@ valid_name() {
 
 case "$1" in
     on)
-        locked do_on
+        locked do_on || exit 1
+        spawn_freeze
         ;;
     off)
-        locked do_off
+        if ! locked do_off; then
+            # The lock holder is stuck (or stopped): resume anyway
+            resume_everything
+            rm -f "$ES_FLAG" "$ACTIVE_FILE"
+            restore_governor
+            log "lock busy: resumed everything without it"
+            exit 1
+        fi
         ;;
     state)
-        locked do_reconcile
+        if [ -f "$ACTIVE_FILE" ] && [ ! -f "$ES_FLAG" ]; then
+            spawn_freeze   # re-stops ES if a holder died
+        fi
         if [ -f "$ES_FLAG" ]; then
             echo frozen
             exit 3
@@ -202,11 +245,12 @@ case "$1" in
         ;;
     hold)
         valid_name "$2" || exit 2
-        locked do_hold "$2" "${3:-$PPID}"
+        locked do_hold "$2" "${3:-$PPID}" || exit 1
         ;;
     release)
         valid_name "$2" || exit 2
-        locked do_release "$2"
+        locked do_release "$2" || exit 1
+        spawn_freeze
         ;;
     run)
         name="$2"
@@ -214,10 +258,13 @@ case "$1" in
         [ "$3" = "--" ] && [ -n "${4:-}" ] || { echo "usage: $0 run NAME -- CMD [ARG...]" >&2; exit 2; }
         shift 3
         locked do_hold "$name" "$$" || exit 1
-        trap 'locked do_release "$name"' EXIT
+        trap 'locked do_release "$name"; spawn_freeze' EXIT
         trap 'exit 130' INT TERM HUP
         "$@"
         exit $?
+        ;;
+    _freeze)
+        do_freeze
         ;;
     *)
         echo "Usage: $0 on|off|state|run NAME -- CMD|hold NAME [PID]|release NAME" >&2
