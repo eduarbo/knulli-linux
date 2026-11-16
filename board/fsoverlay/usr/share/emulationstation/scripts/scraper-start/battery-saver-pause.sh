@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir -p /var/run/batterysaver
-touch /var/run/batterysaver/scraper.pause
+mkdir -p /var/run/battery-saver
+touch /var/run/battery-saver/scraper.pause
 
 exit 0

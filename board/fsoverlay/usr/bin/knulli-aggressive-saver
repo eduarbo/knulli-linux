@@ -1,0 +1,228 @@
+#!/bin/bash
+# Aggressive battery saver with holds, for Knulli scarab 2026/05/11.
+#
+# Same effect as the saver in Knulli's idle hooks (emulators and
+# EmulationStation stopped with SIGSTOP, CPU governor at powersave), following
+# development's knulli-aggressive-saver (lock, state file, only resume what it
+# stopped), plus holds: while a background tool holds the saver, ES keeps
+# running, so its HTTP API (port 1234) answers. Paused games stay paused.
+#
+#   on | off                  called by the idle / active hooks
+#   state                     "frozen" (exit 3) while ES is stopped, else "running"
+#   run NAME -- CMD [ARG...]  hold while CMD runs, then release; exit status of CMD
+#   hold NAME [PID] | release NAME
+#
+# Files (tmpfs): /var/run/battery-saver/aggressive.active while the saver is
+# on; /var/run/emulationstation.suspended (ES process group) while ES is
+# stopped; /var/run/battery-saver/holds/NAME (holder PID) per hold. A hold
+# whose PID is gone is dropped.
+R="${UNIT_ROOT:-}"
+STATE_DIR="$R/var/run/battery-saver"
+LOCK_FILE="$STATE_DIR/aggressive.lock"
+ACTIVE_FILE="$STATE_DIR/aggressive.active"
+GOVERNOR_SAVED="$STATE_DIR/governor.saved"
+STOPPED_PIDS="$STATE_DIR/aggressive-stopped-pids"
+HOLD_DIR="$STATE_DIR/holds"
+ES_FLAG="$R/var/run/emulationstation.suspended"
+ES_INIT="$R/etc/init.d/S31emulationstation"
+CPU_DIR="$R/sys/devices/system/cpu"
+LOG="$R/var/log/battery-saver.log"
+
+mkdir -p "$STATE_DIR" "$HOLD_DIR"
+
+log() {
+    echo "$(date -u +%FT%TZ) $*" >> "$LOG" 2>/dev/null
+}
+
+locked() {
+    (
+        flock -w 10 200 || exit 1
+        "$@"
+    ) 200>"$LOCK_FILE"
+}
+
+check_pause() {
+    compgen -G "$STATE_DIR/*.pause" > /dev/null
+}
+
+es_pid() {
+    pidof emulationstation 2>/dev/null | awk '{print $1}'
+}
+
+has_holds() {
+    local f pid
+    for f in "$HOLD_DIR"/*; do
+        [ -f "$f" ] || continue
+        read -r pid < "$f" 2>/dev/null
+        if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+            return 0
+        fi
+        log "dropping stale hold ${f##*/}"
+        rm -f "$f"
+    done
+    return 1
+}
+
+freeze_es() {
+    local pid pgid
+    [ -f "$ES_FLAG" ] && return 0
+    pid=$(es_pid)
+    [ -n "$pid" ] || return 0
+    pgid=$(ps -o pgid= -p "$pid" | tr -d ' ')
+    [ -n "$pgid" ] || return 0
+    echo "$pgid" > "$ES_FLAG"
+    "$ES_INIT" suspend >/dev/null 2>&1
+    log "EmulationStation stopped (process group $pgid)"
+}
+
+# Only the ES process: a paused game in the same process group stays paused
+thaw_es() {
+    local pid
+    [ -f "$ES_FLAG" ] || return 0
+    pid=$(es_pid)
+    [ -n "$pid" ] && kill -CONT "$pid" 2>/dev/null
+    rm -f "$ES_FLAG"
+    log "EmulationStation running for a hold"
+}
+
+save_and_set_governor() {
+    local current="" g
+    [ -r "$CPU_DIR/cpu0/cpufreq/scaling_governor" ] || return 0
+    read -r current < "$CPU_DIR/cpu0/cpufreq/scaling_governor" 2>/dev/null
+    if [ -n "$current" ] && [ "$current" != "powersave" ] && [ ! -f "$GOVERNOR_SAVED" ]; then
+        echo "$current" > "$GOVERNOR_SAVED"
+    fi
+    for g in "$CPU_DIR"/cpu*/cpufreq/scaling_governor; do
+        echo powersave > "$g" 2>/dev/null || true
+    done
+}
+
+restore_governor() {
+    local saved="" g
+    [ -r "$GOVERNOR_SAVED" ] || return 0
+    read -r saved < "$GOVERNOR_SAVED" 2>/dev/null
+    if [ -n "$saved" ] && [ "$saved" != "powersave" ]; then
+        for g in "$CPU_DIR"/cpu*/cpufreq/scaling_governor; do
+            echo "$saved" > "$g" 2>/dev/null || true
+        done
+    fi
+    rm -f "$GOVERNOR_SAVED"
+}
+
+do_on() {
+    local pid
+    [ -f "$ACTIVE_FILE" ] && return 0
+    check_pause && return 0
+    touch "$ACTIVE_FILE"
+    save_and_set_governor
+    : > "$STOPPED_PIDS"
+    # Emulators run at nice -4
+    for pid in $(ps -eo pid,ni | awk '$2==-4 {print $1}'); do
+        kill -STOP "$pid" 2>/dev/null && echo "$pid" >> "$STOPPED_PIDS"
+    done
+    if has_holds; then
+        log "saver on; EmulationStation kept running for a hold"
+    else
+        freeze_es
+        log "saver on"
+    fi
+}
+
+do_off() {
+    local pid
+    if [ ! -f "$ACTIVE_FILE" ]; then
+        # ES stopped by someone else (the stock inline saver before this
+        # unit was installed): resume like the stock active hook does
+        pid=$(es_pid)
+        if [ -n "$pid" ] && [ "$(ps -o stat= -p "$pid" | cut -c1)" = T ]; then
+            for pid in $(ps -eo pid,ni | awk '$2==-4 {print $1}'); do
+                kill -CONT "$pid" 2>/dev/null
+            done
+            "$ES_INIT" resume >/dev/null 2>&1
+            rm -f "$ES_FLAG"
+            log "resumed a freeze made without the saver"
+        fi
+        return 0
+    fi
+    rm -f "$ACTIVE_FILE"
+    restore_governor
+    "$ES_INIT" resume >/dev/null 2>&1
+    rm -f "$ES_FLAG"
+    if [ -f "$STOPPED_PIDS" ]; then
+        while read -r pid; do
+            [ -n "$pid" ] && kill -CONT "$pid" 2>/dev/null
+        done < "$STOPPED_PIDS"
+        rm -f "$STOPPED_PIDS"
+    fi
+    log "saver off"
+}
+
+do_hold() {
+    echo "$2" > "$HOLD_DIR/$1"
+    [ -f "$ACTIVE_FILE" ] && thaw_es
+    return 0
+}
+
+do_release() {
+    rm -f "$HOLD_DIR/$1"
+    if [ -f "$ACTIVE_FILE" ] && ! has_holds; then
+        freeze_es
+    fi
+    return 0
+}
+
+# A tool that died while holding: freeze again once its hold is gone
+do_reconcile() {
+    if [ -f "$ACTIVE_FILE" ] && [ ! -f "$ES_FLAG" ] && ! has_holds; then
+        freeze_es
+    fi
+    return 0
+}
+
+valid_name() {
+    case "$1" in
+        ''|*[!A-Za-z0-9_.-]*|.*) echo "invalid hold name: $1" >&2; return 1 ;;
+    esac
+}
+
+case "$1" in
+    on)
+        locked do_on
+        ;;
+    off)
+        locked do_off
+        ;;
+    state)
+        locked do_reconcile
+        if [ -f "$ES_FLAG" ]; then
+            echo frozen
+            exit 3
+        fi
+        echo running
+        ;;
+    hold)
+        valid_name "$2" || exit 2
+        locked do_hold "$2" "${3:-$PPID}"
+        ;;
+    release)
+        valid_name "$2" || exit 2
+        locked do_release "$2"
+        ;;
+    run)
+        name="$2"
+        valid_name "$name" || exit 2
+        [ "$3" = "--" ] && [ -n "${4:-}" ] || { echo "usage: $0 run NAME -- CMD [ARG...]" >&2; exit 2; }
+        shift 3
+        locked do_hold "$name" "$$" || exit 1
+        trap 'locked do_release "$name"' EXIT
+        trap 'exit 130' INT TERM HUP
+        "$@"
+        exit $?
+        ;;
+    *)
+        echo "Usage: $0 on|off|state|run NAME -- CMD|hold NAME [PID]|release NAME" >&2
+        exit 1
+        ;;
+esac
+
+exit 0

@@ -12,6 +12,9 @@ AGGRESSIVE="$(/usr/bin/knulli-settings-get system.batterysaver.aggressive)"
 
 MUTE="$(/usr/bin/knulli-settings-get system.batterysaver.mute)"
 
+# Saver with holds; the inline version below is the fallback
+SAVER="/usr/bin/knulli-aggressive-saver"
+
 check_pause() {
   # return 0 if any *.pause exists, else 1
   compgen -G "$BATTSAVER_DIR"/*.pause > /dev/null && return 0
@@ -19,6 +22,11 @@ check_pause() {
 }
 
 do_aggressive() {
+  if [ -x "$SAVER" ]; then
+    "$SAVER" on
+    return
+  fi
+
   # Pause emulator processes (we set to -4 niceness so this is easy to target)
   for pid in $(ps -eo pid,ni | awk '$2==-4 {print $1}'); do
     kill -STOP "$pid"

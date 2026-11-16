@@ -1,5 +1,5 @@
 #!/bin/sh
 
-rm -f /var/run/batterysaver/scraper.pause
+rm -f /var/run/battery-saver/scraper.pause
 
 exit 0
