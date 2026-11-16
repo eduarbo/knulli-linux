@@ -1,0 +1,31 @@
+Default broadcast follows the region
+
+Backport of flyinghead/flycast 1b63c8a3677c ("dreamcast: Default
+broadcast follows the region") to this libretro/flycast snapshot.
+
+Broadcast's Default (4) is out of range for FixUpFlash(), so the flash
+byte kept whatever dc_flash.bin holds. With a PAL flash, games that the
+core runs in the USA or Japan region ran at 50 Hz, about 17 % slow.
+Resolve Default from the region the core has just picked from IP.BIN:
+PAL for Europe, NTSC otherwise. An explicit Broadcast choice is kept.
+
+Upstream: https://github.com/flyinghead/flycast/commit/1b63c8a3677cc8eb1292863c4fe8fc8f94674fc8
+---
+diff --git a/core/nullDC.cpp b/core/nullDC.cpp
+index afd3a44..ac55614 100644
+--- a/core/nullDC.cpp
++++ b/core/nullDC.cpp
+@@ -246,6 +246,13 @@ static void LoadSpecialSettings(void)
+ 	}
+ 	else
+ 		WARN_LOG(BOOT, "No region specified in IP.BIN");
++	// Broadcast left on Default follows the region, the way Region's own
++	// Default follows IP.BIN above: PAL for Europe, NTSC otherwise.
++	// FixUpFlash() skips the out-of-range Default value, which left the
++	// flash byte at whatever the BIOS flash file had, so a PAL flash ran
++	// NTSC games at 50 Hz.
++	if (settings.dreamcast.broadcast == 4)
++		settings.dreamcast.broadcast = settings.dreamcast.region == 2 ? 1 : 0;
+ 	if (settings.dreamcast.cable <= 1 && !ip_meta.supportsVGA())
+ 	{
+ 		NOTICE_LOG(BOOT, "Game doesn't support VGA. Using TV Composite instead");
