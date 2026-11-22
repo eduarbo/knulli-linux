@@ -9,8 +9,9 @@ Esta guía reproduce el frontend de Canica sobre **KNULLI Scarab del 11 de mayo 
 Necesitas Git, Python 3, Bash y Docker con Linux ARM64. Descarga la [imagen oficial de Scarab para RG35XX-H](https://github.com/knulli-cfw/knulli-linux/releases/tag/20260511). Trabaja en un directorio nuevo. El instalador y la imagen se comprueban en el equipo donde compilas.
 
 ```sh
-git clone --depth 1 --branch canica-scarab-20260511 https://github.com/eduarbo/knulli-linux.git firmware
-git clone --branch canica-scarab-build https://github.com/eduarbo/batocera-emulationstation.git frontend
+git clone --depth 1 --filter=blob:none --sparse --branch canica-scarab-20260511 https://github.com/eduarbo/knulli-linux.git firmware
+git -C firmware sparse-checkout set tools/canica
+git clone --single-branch --branch canica-scarab-build https://github.com/eduarbo/batocera-emulationstation.git frontend
 git -C frontend checkout --detach 8ad22d6d1fa27ec9b9dafef6f8613adb868c67d4
 git -C frontend submodule update --init --recursive
 git clone https://github.com/eduarbo/knulli-console-bundles.git herramientas
@@ -53,7 +54,7 @@ mkdir -p "$(dirname "$dest")"
 if [ -e "$dest" ]; then
     cmp -s "$dest" resume-emulatorlauncher || { echo "Ya existe otro adaptador. Se conserva."; exit 1; }
 else
-    install -m 755 resume-emulatorlauncher "$dest"
+    cp resume-emulatorlauncher "$dest" && chmod 755 "$dest"
 fi
 test -x "$dest" && cmp -s resume-emulatorlauncher "$dest"
 ```
