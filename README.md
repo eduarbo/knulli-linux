@@ -1,6 +1,16 @@
-## Canica en la RG35XX-H
+# KNULLI para la Anbernic RG35XX H · Canica
 
-Esta rama fija el frontend de Canica para Scarab. [Compilar, instalar y volver a KNULLI de fábrica](tools/canica/README.md).
+Este fork conserva la base **KNULLI Scarab del 11 de mayo de 2026** y reúne mejoras para la RG35XX H. La integración de Canica fija el EmulationStation modificado para H700 y proporciona el adaptador de partidas. Puedes instalar Canica sobre la microSD oficial con el ZIP de la candidata o compilar el motor desde fuentes. **[Instalar Canica en una Anbernic RG35XX H](https://github.com/eduarbo/knulli-linux/blob/scarab-20260511-fixes/docs/canica-rg35xx-h.md).**
+
+| Componente | Repositorio y función |
+| --- | --- |
+| Firmware y partidas | [Rama Canica de este fork](https://github.com/eduarbo/knulli-linux/tree/canica-scarab-20260511) · receta H700, preparación del kit y adaptador |
+| Menú que ejecuta el tema | [Fork de EmulationStation](https://github.com/eduarbo/batocera-emulationstation) · tarjetas, navegación, vídeo y búsqueda con cruceta |
+| Herramientas para Scarab | [knulli-console-bundles](https://github.com/eduarbo/knulli-console-bundles) · compilación ARM64, servicio reversible y paquetes de correcciones |
+
+**Diferencia frente a Scarab.** La serie `ff02e3d` contiene nueve commits sobre el tag oficial `20260511`, con cambios de suspensión y batería, DraStic, ajustes por juego y Wi-Fi. La integración de Canica `f6a4e9e` acumula **12 commits y 18 archivos modificados** desde ese mismo tag. Los tres posteriores añaden la integración para H700, el instalador desde fuentes, su documentación y el adaptador. La imagen de partida para la instalación documentada es la oficial de la RG35XX H. [Diff de estas revisiones](https://github.com/eduarbo/knulli-linux/compare/c1c7de479e56691c6665723046d9f25500e5ee74...f6a4e9ed39c6cc49c6f5eecbcf08c22a6020ff3a) · [PR de integración](https://github.com/eduarbo/knulli-linux/pull/1)
+
+## Proyecto KNULLI original
 
 [![Activity](https://img.shields.io/github/commit-activity/m/knulli-cfw/distribution)](https://github.com/knulli-cfw/distribution)
 [![PR](https://img.shields.io/github/issues-pr-closed/knulli-cfw/distribution)](https://github.com/knulli-cfw/distribution)
