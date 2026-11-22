@@ -1,12 +1,12 @@
-# Canica en KNULLI · Anbernic RG35XX H
+# Canica para la Anbernic RG35XX H
 
-Canica organiza tu biblioteca en tarjetas con capturas, vídeos, favoritos y tiempo jugado. Puedes usar Iris o Ámbar sobre **KNULLI Scarab oficial del 11 de mayo de 2026**. El frontend ampliado añade categorías, búsqueda de palabras con la cruceta y acceso directo a partidas.
+Canica usa mi fork de EmulationStation sobre KNULLI Scarab. Agrupa las consolas por categoría, permite buscar con la cruceta y separa **A · Jugar** de **X · Partidas**. Iris y Ámbar comparten los mismos controles.
 
-**El ZIP del tema se distribuye por separado.** Si ya lo tienes, puedes instalarlo copiando una carpeta a tu tarjeta. [Instalar Canica, elegir una variante o volver al menú anterior](docs/canica-rg35xx-h.md)
+**Para replicar mi consola necesitas el kit de Canica para la RG35XX H.** La guía explica qué archivo copiar, cómo reconocer el menú correcto y cómo volver al anterior. El motor y el instalador son públicos. El tema y su arte se entregan por separado. [Instalación en la RG35XX H](docs/canica-rg35xx-h.md)
 
-![Recorrer una biblioteca con Canica Iris en el menú oficial de Scarab](docs/media/canica-oficial.gif)
+![Búsqueda con la cruceta en la RG35XX H](docs/media/canica/buscar.gif)
 
-*Captura de EmulationStation de Scarab en escritorio ARM64 a 640 × 480, con una biblioteca de demostración.*
+[Ver la galería de controles, partidas, vistas previas y ajustes](docs/canica-en-accion.md)
 
 ## Qué aporta este fork
 

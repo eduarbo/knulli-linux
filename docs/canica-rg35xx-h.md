@@ -1,39 +1,35 @@
-# Canica en la Anbernic RG35XX H
+# Replicar Canica en una RG35XX H
 
-Canica muestra la biblioteca en tarjetas. Al recorrerlas ves la carátula, el género y tus estadísticas. Si la ficha tiene vídeo, puedes verlo sin abrir el juego. Iris y Ámbar comparten la distribución.
+Esta es la configuración de mi Anbernic RG35XX H. Usa KNULLI Scarab del **11 de mayo de 2026** como base, con **mi fork de EmulationStation**, el tema **Canica** y el **adaptador de partidas**. La combinación con esos componentes es la que mantengo. El paquete está en fase de candidata.
 
-**Para usar el tema con el menú oficial, necesitas la RG35XX H con KNULLI Scarab del 11 de mayo de 2026 y el ZIP del tema RC28.** El ZIP visual se comparte por separado. Lo que se puede descargar públicamente de este repositorio es el instalador de la edición ampliada y su código.
+[Ver las demostraciones grabadas en la consola](canica-en-accion.md)
 
-## Instalar solo el tema
+## Instalar desde la consola
 
-1. Abre la carpeta compartida `share` de la consola. En Finder usa **Ir → Conectarse al servidor** y escribe `smb://KNULLI/share`. En el Explorador de Windows escribe `\\KNULLI\share`. También puedes usar la partición de datos de la tarjeta. [Acceso por red en KNULLI](https://knulli.org/play/add-games/network-transfer/)
-2. Descomprime `canica-1.0.1-rc28.zip`. Copia la carpeta **es-theme-canica** a **themes**. Desde `share` debes ver `themes/es-theme-canica/theme.xml`. Si personalizaste una carpeta con ese nombre, conserva una copia antes de sustituirla.
-3. En la consola abre **START → Ajustes de la interfaz de usuario → Tema → es-theme-canica**. En **Ajustes del tema → Variante**, elige **Iris** o **Ámbar**. Para volver, selecciona tu tema anterior.
+1. **Consigue el kit RC29.1 para RG35XX H.** Si ya tienes el archivo **Instalar Canica.sh** con el kit integrado (unos 5,2 MB), sólo necesitas ese archivo. Si recibiste **canica-1.0.1-rc29.1-rg35xx-h.zip**, conserva su nombre y descarga el instalador ligero para acompañarlo. El tema y su arte todavía se entregan por separado de los repositorios públicos. [Descargar el instalador ligero](https://raw.githubusercontent.com/eduarbo/knulli-linux/main/tools/canica/Instalar%20Canica.sh)
+2. **Copia los archivos en Herramientas.** Abre el recurso compartido de la consola. En Finder, **Ir → Conectarse al servidor →** `smb://KNULLI/share`. En el Explorador de Windows, abre `\\KNULLI\share`. Dentro de **roms/tools** coloca el instalador completo, o el ligero junto al ZIP sin extraer. También puedes copiarlos desde la partición de datos de la tarjeta. [Transferencia en KNULLI](https://knulli.org/play/add-games/network-transfer/)
+3. **Abre Herramientas → Instalar Canica** y pulsa **A**. Si la herramienta aún no aparece, abre **START → Ajustes de juegos → Actualizar listas de juegos**. El instalador comprueba el modelo, la versión del firmware y la integridad del kit. Si detecta otro servicio que controla el menú o un archivo personalizado en conflicto, muestra cuál es y conserva el archivo. Espera el mensaje **Canica está listo** y reinicia al terminar tu partida.
+4. **Selecciona el tema.** En **START → Ajustes de la interfaz de usuario → Tema**, elige **es-theme-canica**. En **Ajustes del tema → Variante**, elige **Iris** o **Ámbar**. Deja **Tamaño pred. de cuadrícula** en **Automático** para usar la distribución de cada sistema.
+5. **Comprueba la instalación.** Abre una consola con juegos. **Y** debe mostrar un teclado con tarjetas de palabras. **X** debe abrir Partidas y **A** debe iniciar el juego. Si tienes SSH, `knulli-services status canica` debe responder **Canica en ejecución**.
 
-**Fondos con tus capturas.** Copia **Preparar fondos de Canica.sh** desde la carpeta del tema a `roms/tools` de `share` y ábrelo en **Herramientas**. La herramienta elige una imagen de la biblioteca para cada consola y conserva las ilustraciones originales. Vuelve a seleccionar el tema para ver los nuevos fondos. Puedes repetirlo después de añadir capturas.
+Para una tarjeta nueva, instala primero la imagen Scarab de la **RG35XX H**. La instalación del kit en este modelo se probó sobre una tarjeta en uso. Queda pendiente su primer arranque en una microSD recién preparada. [Imagen base de la RG35XX H](https://github.com/knulli-cfw/knulli-linux/releases/download/20260511/knulli-h700-rg35xx-h-scarab-20260511.img.gz) · [Preparar la tarjeta](https://knulli.org/play/install/)
 
-| Con qué lo abres | Qué verás |
+## Fondos y partidas
+
+El instalador compone los fondos con las capturas que ya están en tu biblioteca. Conserva la imagen completa y su orientación, aplica los cuatro tonos de Game Boy y separa la pantalla superior de DS cuando las dos aparecen juntas. Puedes ejecutar el instalador otra vez después de añadir medios. Para los vídeos de los juegos, selecciona **Ajustes del tema → Vídeo en la tarjeta seleccionada → Reproducir**.
+
+Con **A**, el adaptador compara el guardado automático y las ranuras compatibles del juego. Si la partida interna cambió por sincronización, preserva ese avance. Con **X**, tú eliges la ranura. Algunos sistemas, como PICO-8, guardan dentro del propio juego.
+
+## Qué instala cada fork
+
+| Componente | Procedencia y función |
 | --- | --- |
-| KNULLI Scarab oficial, RG35XX H | Cuadrícula de consolas y juegos, arte de tu biblioteca, vídeos, marcadores y contadores. Las acciones disponibles aparecen en el pie del menú. |
-| EmulationStation de Canica para Scarab | Se añaden categorías, salto entre consolas con L1/R1, páginas con L2/R2, búsqueda por palabras con la cruceta y selección de partidas con X. A inicia el juego. |
-| EmulationStation clásico de Aloshi | Usa el ZIP **canica-clasico**. Incluye las variantes como dos temas seleccionables y una lista nativa con captura y descripción. [Vista de Ámbar en el frontend clásico](media/canica-clasico.png) |
+| Menú | El binario ARM64 procede de la revisión `8ad22d6` del fork de EmulationStation. Ejecuta las categorías, los atajos, las tarjetas de búsqueda y las vistas previas. [Fuentes del frontend](https://github.com/eduarbo/batocera-emulationstation/tree/8ad22d6d1fa27ec9b9dafef6f8613adb868c67d4) |
+| Partidas y firmware | El fork de KNULLI aporta la receta para H700, el instalador y el adaptador que comunica la ranura seleccionada al lanzador de juegos. [Instalador y adaptador](../tools/canica/README.md) |
+| Compilación y recuperación | El repositorio de herramientas aporta las bibliotecas y scripts para construir el motor en ARM64 y recuperar el menú de fábrica. El kit integrado activa el servicio **CANICA**. La instalación manual desde fuentes emplea **ES_PATCHED**. Activa sólo el de tu método. [Herramientas fijadas](https://github.com/eduarbo/knulli-console-bundles/tree/5942f8a9681d0cfcb52f4658f56d32b367bdcd69) |
 
-![Canica en EmulationStation de KNULLI, recorrido de la lista y vídeo con marcadores atenuados](media/canica-oficial.gif)
+Si ya tienes **KNULLI Scarab** en esa consola, el instalador conserva su sistema base y añade el frontend en la partición de datos. Compilar el firmware completo es opcional. El catálogo, las carátulas, los vídeos y las partidas provienen de tu tarjeta. [Compilar los forks y el adaptador](../tools/canica/README.md)
 
-[Ver la búsqueda por palabras del frontend ampliado](media/canica-recorrido.gif)
+## Volver al menú anterior
 
-*Grabaciones de los frontends en escritorio ARM64, 640 × 480, con ilustraciones de muestra. Las pruebas de Scarab se hicieron en una RG35XX H con su tarjeta en uso. Sigue pendiente el primer arranque del paquete ampliado desde una microSD limpia.*
-
-## Instalar el frontend ampliado en Scarab
-
-Si ya tienes **Instalar Canica.sh** con el kit dentro, copia ese único archivo a `roms/tools` dentro de `share`. Si recibiste **canica-1.0.1-rc28-rg35xx-h.zip**, copia el ZIP con su nombre original, sin extraerlo, y pon el instalador público a su lado. [Descargar el instalador ligero](https://raw.githubusercontent.com/eduarbo/knulli-linux/main/tools/canica/Instalar%20Canica.sh)
-
-Abre **Herramientas → Instalar Canica** y pulsa **A**. Si aún no aparece, usa **START → Ajustes de juegos → Actualizar listas de juegos**. Cuando indique «Canica está listo», reinicia y selecciona el tema. El kit completo de RC28 ya incluye la edición adaptable. El instalador ligero también reconoce los kits RC27.1 y RC27.2 por su nombre original.
-
-Para volver al motor de fábrica, selecciona un tema compatible, desactiva **CANICA** en **Ajustes del sistema → Servicios** y reinicia. Los archivos instalados permanecen en la tarjeta. Si se interrumpió la instalación, abre de nuevo la herramienta. El resultado queda en `system/logs/canica-instalacion.txt` dentro de `share`. El instalador comprueba el modelo, Scarab y el motor de fábrica antes de cambiar archivos.
-
-## EmulationStation clásico
-
-Descomprime `canica-clasico.zip` dentro de `~/.emulationstation/themes/`. Las carpetas `canica-iris` y `canica-ambar` deben quedar directamente dentro de `themes`. Elige la variante en los ajustes de interfaz. Se comprobó el frontend original en Linux ARM64 con una biblioteca de muestra. [Versión de Aloshi probada](https://github.com/Aloshi/EmulationStation/tree/9cc42adff67946175d2b7e25c6ae69cc374e98a0)
-
-Para preparar una tarjeta nueva, sigue las instrucciones de KNULLI y elige la imagen exacta de la RG35XX H. Para reproducir el motor desde fuentes, consulta la guía del fork. [Instalar KNULLI](https://knulli.org/play/install/) · [Imagen Scarab para RG35XX H](https://github.com/knulli-cfw/knulli-linux/releases/download/20260511/knulli-h700-rg35xx-h-scarab-20260511.img.gz) · [Compilación y recuperación](../tools/canica/README.md)
+Selecciona primero el tema que usabas. En **Ajustes del sistema → Servicios**, desactiva **CANICA** y reinicia. Tu biblioteca y los archivos instalados permanecen en la tarjeta. Si la instalación se interrumpió, vuelve a abrir el instalador. El resultado queda en `system/logs/canica-instalacion.txt` dentro de `share`. Para una instalación manual con **ES_PATCHED**, usa la recuperación de su guía de compilación.

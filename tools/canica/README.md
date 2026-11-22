@@ -12,7 +12,7 @@ set -eu
 git init -q firmware
 git -C firmware remote add origin https://github.com/eduarbo/knulli-linux.git
 git -C firmware sparse-checkout set tools/canica
-git -C firmware fetch --depth 1 --filter=blob:none origin d315657339ec64848a1e2d9a3a0d3849edaa4a3c
+git -C firmware fetch --depth 1 --filter=blob:none origin 200433ab68bfca5434af1c07e748a6c7c5d531e8
 git -C firmware checkout -q --detach FETCH_HEAD
 git clone --single-branch --branch canica-scarab-build https://github.com/eduarbo/batocera-emulationstation.git frontend
 git -C frontend checkout --detach 8ad22d6d1fa27ec9b9dafef6f8613adb868c67d4
@@ -47,7 +47,7 @@ src=/userdata/system/canica-kit/resume-emulatorlauncher
 (
   set -eu
   dest=/userdata/system/configs/emulationstation/resume/emulatorlauncher
-  printf '%s  %s\n' e746b025d1079289d176af8645c12a129b98b0bd8acec177a4a5ec2483d73e42 "$src" | sha256sum -c -
+  printf '%s  %s\n' 4e36929f93928371f3d151fa7cd71b3198b9246b2fd74a0bd0d5870874613b8e "$src" | sha256sum -c -
   mkdir -p "$(dirname "$dest")"
   if [ -e "$dest" ] || [ -L "$dest" ]; then
     cmp -s "$src" "$dest" || { echo 'Se conserva el adaptador existente. Compara las versiones.'; exit 1; }
@@ -69,6 +69,6 @@ Desde la raíz de este repositorio, ejecuta:
 python3 -B tools/canica/installer/build.py 'Instalar Canica.sh'
 ```
 
-La herramienta pública incluye el instalador y el adaptador de partidas. Para preparar una copia local que incluya el tema, añade `--kit /ruta/canica-1.0.1-rc28-rg35xx-h.zip`. El empaquetador acepta las candidatas RC27.1, RC27.2 y RC28 identificadas por SHA-256. La licencia del arte sigue pendiente. El kit privado se conserva fuera de este repositorio.
+La herramienta pública incluye el instalador y el adaptador de partidas. Para preparar una copia local que incluya el tema, añade `--kit /ruta/canica-1.0.1-rc29.1-rg35xx-h.zip`. El empaquetador acepta las candidatas RC27.1, RC27.2, RC28, RC29 y RC29.1 identificadas por SHA-256. La licencia del arte sigue pendiente. El kit privado se conserva fuera de este repositorio.
 
 El instalador verifica el modelo, el firmware y el ejecutable original antes de instalar. Prepara y verifica los archivos en la partición de datos y habilita Canica para el siguiente arranque. Al volver a ejecutarlo después de una interrupción, recupera la operación pendiente. Las partidas, ROM y ajustes del tema quedan fuera de la lista de escritura. La prueba física del tema usó la tarjeta habitual de una RG35XX H. El primer arranque del paquete ampliado desde una microSD limpia sigue pendiente.
