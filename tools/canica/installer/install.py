@@ -20,8 +20,9 @@ THEME = 'themes/es-theme-canica'
 ENGINE = 'system/canica'
 SERVICE = 'system/services/canica'
 ADAPTER = 'system/configs/emulationstation/resume/emulatorlauncher'
-ADAPTER_SHA = 'e746b025d1079289d176af8645c12a129b98b0bd8acec177a4a5ec2483d73e42'
+ADAPTER_SHA = '4e36929f93928371f3d151fa7cd71b3198b9246b2fd74a0bd0d5870874613b8e'
 PACKAGES = {
+    'canica-1.0.1-rc29-rg35xx-h.zip': 'e7a76df26626d5f1b36da884bb83e697d0202424a8b68b88419cf9d045e2f50b',
     'canica-1.0.1-rc28-rg35xx-h.zip': 'fff74d3af75fd613954c5e16ae69244bf07501976c3636a7fab74604144d6951',
     'canica-1.0.1-rc27.2-rg35xx-h.zip': 'c1133da6a93a8b94f8126fea8f43d69cdcbde5a4976e4497f85e1b20194b8021',
     'canica-1.0.1-rc27.1-rg35xx-h.zip': '113e8b662fee7083ecd2383600ca6f4cfd7383065088f9def055383be6605828',
@@ -29,6 +30,39 @@ PACKAGES = {
 # An upgrade may replace an untouched file from a known earlier kit.
 # Each destination digest is paired with its permitted predecessors.
 PREVIOUS = {
+    # RC29 predecessors from the sealed RC27.1, RC27.2 and RC28 kits.
+    ('system/canica/SHA256SUMS',
+     '575482d4cdfe578cc7660e4a093f57a2e1c3004684d963f30e3852974708f7a1'): {
+        '63caf5e4d9f8e95d77631cc56b7a404d951f8e94d0578f31d91f2294c25741a2',
+        '71d4f6ae6249c63941efa237cb63f068dd5a0ecdcbad10d2be0675cdec27429c',
+        'a04d84433887d06e3d0bec8d451a0363a2b7744c380c616091012ef52681f62c',
+    },
+    ('system/services/canica',
+     'ffafa4c743a60732b553a376247e158f4ae65be8a063c7899dcd296d04051dc2'): {
+        '27928228e36e2db417cf46ac11d674580a7c12efa95ed7e728c986e1cbbc8794',
+        '390bc1dcc4e1e4f0875d30c3c56c8d61fc06d7dcc05e566ecb89bd4bb61f2993',
+        '71eca699c971d070e33cb97a9ae1fee11829f6a8c6340cf240b707271b3475c8',
+    },
+    ('themes/es-theme-canica/Preparar fondos de Canica.sh',
+     'c5a3bf13612d8d505063135c875a7cd2cd09f8bb8d3625096ffaa59643ff79ab'): {
+        '01c87df60a66aa18fa9ccc27410cfe790e3410f78c70433783be099ad7c45b85',
+    },
+    ('themes/es-theme-canica/README.md',
+     '7080f0ecdc7a1ab968b5159eeb2efdfa792fbc5ee81da43e446178824f25e398'): {
+        '1acd949b55259b54399d41d64bc4a1828de7120acf3bcaa12632011d60945631',
+        '32bf92075794123dc9c73349a46a93c0ad3958a6e8d57f50ebd6008d023adce3',
+        'ffdc7da73ac53f78922b132c9428d2155f08093fbbf5c1307003bcb17a46deea',
+    },
+    ('themes/es-theme-canica/bindings.xml',
+     '3e3693e568a04c22fe55092d7bf824005253bf7adc2d612ca6ba64a8c0f3772a'): {
+        'e4a254f171403edd55c557f0392f9f6f03425b6517d8c31b8e5eac549207e9bb',
+    },
+    ('themes/es-theme-canica/theme.xml',
+     '9c3783ab4cf9a0c8487932fd3ff8adcc2efa6d0e55c3a91f9c6792088906b546'): {
+        '1c42716796064bfbca89312a2650211f5645a1f2370675eedad86b3d81f4f9f7',
+        'f6fcec2b712284c21a107c2694ac0b2f45879fdf577dd357d5f7dcb625fdf142',
+    },
+    (ADAPTER, ADAPTER_SHA): {"e746b025d1079289d176af8645c12a129b98b0bd8acec177a4a5ec2483d73e42"},
     ('system/canica/SHA256SUMS',
      '71d4f6ae6249c63941efa237cb63f068dd5a0ecdcbad10d2be0675cdec27429c'): {
         '63caf5e4d9f8e95d77631cc56b7a404d951f8e94d0578f31d91f2294c25741a2',
@@ -167,7 +201,8 @@ def changes(root, kit, adapter):
         old = file_digest(path)
         with source(kit, name, adapter) as member:
             new = stream_digest(member)
-        if name == ADAPTER and old and (old != new or not os.access(path, os.X_OK)):
+        if name == ADAPTER and old and (not os.access(path, os.X_OK) or
+                (old != new and old not in PREVIOUS.get((name, new), ()))):
             custom_adapter = True
             continue
         if old == new:
@@ -238,10 +273,17 @@ def install(tool, root, console):
     with read_package(tool) as (archive, adapter):
         files, custom_adapter = changes(root, archive, adapter)
         commit_files(root, work, console, archive, adapter, files)
+        generator = 'share/' + THEME + '/card_screens.py'
+        card_warning = ''
+        if generator in archive.namelist() and root == Path('/userdata'):
+            # Run the verified kit member, independent of the contents of the SD card.
+            result = subprocess.run([sys.executable, '-I', '-'], input=archive.read(generator))
+            if result.returncode:
+                card_warning = ' No se pudieron preparar los fondos. Vuelve a abrir el instalador para reintentar.'
     message = 'Canica está listo. Reinicia la consola y elige es-theme-canica en los ajustes de interfaz.'
     if custom_adapter:
         message += ' Se conservó tu adaptador de partidas.'
-    return message
+    return message + card_warning
 
 
 def commit_files(root, work, console, archive, adapter, files):

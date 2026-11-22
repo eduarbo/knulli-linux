@@ -78,6 +78,23 @@ class ResumePolicy(unittest.TestCase):
             self.assertIn(f'savestate_auto_load = "{auto}"', overlay.read_text())
             self.assertIn('block_sram_overwrite = "true"', overlay.read_text())
 
+    def test_manual_state_updated_outside_last_launch_without_battery(self):
+        self.mark("state.auto", b"automatic", 20)
+        self.policy().finish()
+        self.mark("state", b"manual", 30)
+        self.assertEqual(self.policy().newest()[1], 0)
+        self.mark("state.auto", b"automatic again", 40)
+        self.assertEqual(self.policy().newest()[1], -1)
+
+    def test_sync_changes_progress_during_session(self):
+        self.mark("srm", b"old", 10)
+        self.mark("state1", b"old scene", 20)
+        active = self.policy()
+        self.imported = 30
+        self.mark("srm", b"new from TV", 5)
+        active.finish()
+        self.assertIsNone(self.policy().newest())
+
     def test_no_state(self):
         self.assertIsNone(self.policy().newest())
 

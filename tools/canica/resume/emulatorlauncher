@@ -78,7 +78,7 @@ def download_time(rom, system):
     def literal(value):
         return "CAST(X'" + value.encode().hex() + "' AS TEXT)"
     if not GR_DB.is_file():
-        return None
+        return 0
     query = ("WITH ids AS (SELECT id FROM games WHERE platform_fs_slug=" + literal(system) +
              " COLLATE NOCASE AND (fs_name=" + literal(rom.name) + " OR expected_basename=" +
              literal(rom.stem) + ") UNION SELECT game_id FROM game_basenames WHERE platform_fs_slug=" +
@@ -107,7 +107,13 @@ class Resume:
         ):
             raise ValueError("invalid resume history")
         self.allowed = {}
-        if self.prior is not None:
+        # Without battery progress or a sync download, numbered and automatic states
+        # are the only progress. A manual save need not have been observed at exit.
+        if not self.progress and self.download == 0 and (
+            self.prior is None or (not self.prior["progress"] and self.prior["download"] == 0)
+        ):
+            self.allowed = self.before.copy()
+        elif self.prior is not None:
             same = self.prior["progress"] == self.progress and (bool(self.progress) or self.prior["download"] == self.download)
             if same:
                 self.allowed = {name: val for name, val in self.before.items()
@@ -132,10 +138,14 @@ class Resume:
         states = candidates(self.directory, self.pattern)
         # Only newly written states can establish a new line of progress.
         # A cold start after a download never endorses old, untouched slots.
-        live = {k: v for k, v in states.items() if v != self.before.get(k) or (explicit is None and k in self.allowed)
-                or (explicit is not None and v[2] == explicit)}
+        live = {k: v for k, v in states.items() if v != self.before.get(k)
+                or (k in self.allowed and (explicit is None or v[2] == explicit))}
+        progress = battery(self.save_dir, self.rom.stem)
+        downloaded = download_time(self.rom, self.system) if states or progress else None
+        if downloaded != self.download and progress != self.progress:
+            live = {}
         self.record.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
-        data = {"progress": battery(self.save_dir, self.rom.stem), "download": self.download, "states": live}
+        data = {"progress": progress, "download": downloaded, "states": live}
         with tempfile.NamedTemporaryFile(mode="w", dir=self.record.parent, delete=False) as f:
             try:
                 json.dump(data, f)
