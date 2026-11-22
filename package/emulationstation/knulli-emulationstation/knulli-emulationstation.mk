@@ -8,7 +8,7 @@ KNULLI_EMULATIONSTATION_VERSION = 4041b56a714265de81de8165b34fbd10f313a891
 KNULLI_EMULATIONSTATION_SITE = https://github.com/knulli-cfw/batocera-emulationstation
 ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_H700),y)
 # This source omits the four Scarab packaging patches applied by Buildroot below.
-KNULLI_EMULATIONSTATION_VERSION = 87a1319b60c241ddcdc802986a86316fe5569feb
+KNULLI_EMULATIONSTATION_VERSION = 4215ca1eb833688a7b34f8f0b2c026584b9110b9
 KNULLI_EMULATIONSTATION_SITE = https://github.com/eduarbo/batocera-emulationstation
 endif
 KNULLI_EMULATIONSTATION_SITE_METHOD = git

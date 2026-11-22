@@ -22,6 +22,7 @@ SERVICE = 'system/services/canica'
 ADAPTER = 'system/configs/emulationstation/resume/emulatorlauncher'
 ADAPTER_SHA = '4e36929f93928371f3d151fa7cd71b3198b9246b2fd74a0bd0d5870874613b8e'
 PACKAGES = {
+    'canica-1.0.1-rc30-rg35xx-h.zip': '10005c911c49fa46312f734874ef78148dec1b8e4b9f829987bc8c98e169f727',
     'canica-1.0.1-rc29.1-rg35xx-h.zip': '5f6e44e0ef228a0d2062b3cc2555730c44d5e3a331e66160d0530fe8d4e11504',
     'canica-1.0.1-rc29-rg35xx-h.zip': 'e7a76df26626d5f1b36da884bb83e697d0202424a8b68b88419cf9d045e2f50b',
     'canica-1.0.1-rc28-rg35xx-h.zip': 'fff74d3af75fd613954c5e16ae69244bf07501976c3636a7fab74604144d6951',
@@ -31,6 +32,51 @@ PACKAGES = {
 # An upgrade may replace an untouched file from a known earlier kit.
 # Each destination digest is paired with its permitted predecessors.
 PREVIOUS = {
+    # RC30 upgrades from sealed earlier kits.
+    ('system/canica/SHA256SUMS',
+     '2b311fdffadd2e464101d2bbf40cc4fc2548f1aa62bc239bac68a3dcbf050107'): {
+        '3375eb0db2b58c67df329805dadb27cc82489a11781838e9c1638bf625ac2015',
+        '575482d4cdfe578cc7660e4a093f57a2e1c3004684d963f30e3852974708f7a1',
+        '63caf5e4d9f8e95d77631cc56b7a404d951f8e94d0578f31d91f2294c25741a2',
+        '71d4f6ae6249c63941efa237cb63f068dd5a0ecdcbad10d2be0675cdec27429c',
+        'a04d84433887d06e3d0bec8d451a0363a2b7744c380c616091012ef52681f62c',
+    },
+    ('system/canica/bin/emulationstation',
+     'e01811482186db924a2c855f81084c800d6782621445b43a2cdc2600ba812c4f'): {
+        '39235ef32ef9aa0ee3ec6274ab0877346cc5594446e2535f4e80cd41661f8314',
+    },
+    ('system/services/canica',
+     'ffdf96c6d9cb19f2d0845d178270b617949536ec88641725ec3134d214c0c4f1'): {
+        '27928228e36e2db417cf46ac11d674580a7c12efa95ed7e728c986e1cbbc8794',
+        '2d834b0414ff1fca8378a617ac6a2b50f8589ea3dec5baa573d48900e148c7cd',
+        '390bc1dcc4e1e4f0875d30c3c56c8d61fc06d7dcc05e566ecb89bd4bb61f2993',
+        '71eca699c971d070e33cb97a9ae1fee11829f6a8c6340cf240b707271b3475c8',
+        'ffafa4c743a60732b553a376247e158f4ae65be8a063c7899dcd296d04051dc2',
+    },
+    ('themes/es-theme-canica/README.md',
+     '20b609bb34f7975494483d7b94e855043d96821126d1b25317a546f2ec36d27a'): {
+        '1acd949b55259b54399d41d64bc4a1828de7120acf3bcaa12632011d60945631',
+        '32bf92075794123dc9c73349a46a93c0ad3958a6e8d57f50ebd6008d023adce3',
+        '403305aa227666b4b589cd0e6bcfcae6fd2cefc0c27c12a0f5f82a445df69766',
+        '7080f0ecdc7a1ab968b5159eeb2efdfa792fbc5ee81da43e446178824f25e398',
+        'ffdc7da73ac53f78922b132c9428d2155f08093fbbf5c1307003bcb17a46deea',
+    },
+    ('themes/es-theme-canica/bindings.xml',
+     'f74f7135e30cf585d96e400a615ede64667b0f202584882786cf4fd9bd2c197f'): {
+        '3e3693e568a04c22fe55092d7bf824005253bf7adc2d612ca6ba64a8c0f3772a',
+        'e4a254f171403edd55c557f0392f9f6f03425b6517d8c31b8e5eac549207e9bb',
+    },
+    ('themes/es-theme-canica/card_screens.py',
+     '8bb64bfbb189ee52a6233f39e70873d2c01f2c0e111d25e2d93e73b77f6cab12'): {
+        '34e5b8b3b02e7dbf96060c45e0acfd600ed04649915af3f5e433c3633e7913b7',
+    },
+    ('themes/es-theme-canica/theme.xml',
+     '020c13cbd8de6c67e46a412fb62b208bcb9128b64b6e8f80836b7917c4b1ef7f'): {
+        '1c42716796064bfbca89312a2650211f5645a1f2370675eedad86b3d81f4f9f7',
+        '9c3783ab4cf9a0c8487932fd3ff8adcc2efa6d0e55c3a91f9c6792088906b546',
+        'e55d1a85b4127318ef2f257c0850817b46b2ccfd8ad177b9303e69e8c92ff33e',
+        'f6fcec2b712284c21a107c2694ac0b2f45879fdf577dd357d5f7dcb625fdf142',
+    },
     # RC29.1 upgrades
     ('system/canica/SHA256SUMS',
      '3375eb0db2b58c67df329805dadb27cc82489a11781838e9c1638bf625ac2015'): {

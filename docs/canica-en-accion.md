@@ -155,7 +155,7 @@ Ascent arranca desde la cuadrícula. Se ha recortado la espera entre el menú y 
 <details>
 <summary>Elegir una ranura con X</summary>
 
-Abre Partidas para comparar la fecha y hora de los guardados o empezar de nuevo.
+Pulsa X para abrir Partidas. Cada ranura muestra la captura a todo lo ancho y su fecha y hora dentro de la tarjeta.
 
 ![Elegir una ranura con X en la RG35XX H](media/canica/partidas.gif)
 

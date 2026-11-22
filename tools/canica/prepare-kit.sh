@@ -10,7 +10,7 @@ bundles=$(cd "$1" && pwd)
 binary=$2
 dest=$3
 tools_sha=5942f8a9681d0cfcb52f4658f56d32b367bdcd69
-source_sha=8ad22d6d1fa27ec9b9dafef6f8613adb868c67d4
+source_sha=4215ca1eb833688a7b34f8f0b2c026584b9110b9
 unit=units/07-es-api-events/install
 [ -f "$binary" ] && [ ! -e "$dest" ] || { echo "Supply a built binary and a new kit directory" >&2; exit 1; }
 python3 - "$binary" <<'PY'
