@@ -1,3 +1,7 @@
+## Canica en la RG35XX-H
+
+Esta rama fija el frontend de Canica para Scarab. [Compilar, instalar y volver a KNULLI de fábrica](tools/canica/README.md).
+
 [![Activity](https://img.shields.io/github/commit-activity/m/knulli-cfw/distribution)](https://github.com/knulli-cfw/distribution)
 [![PR](https://img.shields.io/github/issues-pr-closed/knulli-cfw/distribution)](https://github.com/knulli-cfw/distribution)
 [![Stars](https://img.shields.io/github/stars/knulli-cfw?style=social)](https://github.com/knulli-cfw/distribution)
