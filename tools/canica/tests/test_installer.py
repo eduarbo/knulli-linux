@@ -63,6 +63,24 @@ class InstallerTest(unittest.TestCase):
     def tearDown(self):
         self.assertEqual(self.save.read_bytes(), b'progress')
 
+    def test_preserve_unexpected_work_file(self):
+        work = self.root / 'system/.canica-installer-v1'
+        work.mkdir()
+        (work / 'installer-v1').touch()
+        note = work / 'nota.txt'
+        note.write_text('local')
+        with self.assertRaisesRegex(ValueError, 'archivo inesperado'):
+            self.launch()
+        self.assertEqual(note.read_text(), 'local')
+        self.assertFalse(self.theme.exists())
+
+    def test_embedded_install(self):
+        with ZipFile(self.tool, 'a') as app:
+            app.write(self.kit, self.kit.name)
+        self.kit.unlink()
+        self.launch()
+        self.assertEqual(self.theme.read_bytes(), b'<theme/>')
+
     def test_install_twice(self):
         self.launch()
         inode = self.theme.stat().st_ino
@@ -114,7 +132,7 @@ class InstallerTest(unittest.TestCase):
     def test_recover_killed_install_then_retry(self):
         self.theme.parent.mkdir(parents=True)
         self.theme.write_bytes(b'previous release')
-        earlier = {str(self.theme.relative_to(self.root)): MODULE['digest'](b'previous release')}
+        earlier = {(str(self.theme.relative_to(self.root)), MODULE['digest'](b'<theme/>')): {MODULE['digest'](b'previous release')}}
         replace = os.replace
         def interrupt(src, dest):
             result = replace(src, dest)
@@ -128,6 +146,13 @@ class InstallerTest(unittest.TestCase):
                 process.join(10)
                 self.assertEqual(process.exitcode, 37)
             self.assertTrue((self.root / 'system/.canica-installer-v1/pending.json').exists())
+            extra = self.root / 'system/.canica-installer-v1/nota'
+            extra.write_text('local')
+            with self.assertRaisesRegex(ValueError, 'archivo inesperado'):
+                self.launch()
+            self.assertEqual(self.theme.read_bytes(), b'previous release')
+            self.assertEqual(extra.read_text(), 'local')
+            extra.unlink()
             self.kit.rename(self.kit.with_suffix('.off'))
             with self.assertRaisesRegex(ValueError, 'ZIP'):
                 self.launch()

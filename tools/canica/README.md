@@ -1,6 +1,6 @@
 # Compilar el frontend de Canica
 
-Para instalar el tema en tu consola, usa la [guía de tres pasos](../../docs/canica-rg35xx-h.md). Esta página explica cómo reproducir el motor y empaquetar el instalador.
+Para instalar el tema en tu consola, usa la [guía de instalación](../../docs/canica-rg35xx-h.md). Esta página explica cómo reproducir el motor y empaquetar el instalador.
 
 ## Motor ARM64 para Scarab
 
@@ -69,6 +69,6 @@ Desde la raíz de este repositorio, ejecuta:
 python3 -B tools/canica/installer/build.py 'Instalar Canica.sh'
 ```
 
-La herramienta pública incluye el instalador y el adaptador de partidas. Para preparar una copia local que incluya el tema, añade `--kit /ruta/canica-1.0.1-rc27.2-rg35xx-h.zip`. El empaquetador acepta las candidatas RC27.1 y RC27.2 identificadas por SHA-256. La licencia del arte sigue pendiente. El kit privado se conserva fuera de este repositorio.
+La herramienta pública incluye el instalador y el adaptador de partidas. Para preparar una copia local que incluya el tema, añade `--kit /ruta/canica-1.0.1-rc28-rg35xx-h.zip`. El empaquetador acepta las candidatas RC27.1, RC27.2 y RC28 identificadas por SHA-256. La licencia del arte sigue pendiente. El kit privado se conserva fuera de este repositorio.
 
-El instalador verifica el modelo, el firmware y el ejecutable original antes de instalar. Prepara y verifica los archivos en la partición de datos y habilita Canica para el siguiente arranque. Al volver a ejecutarlo después de una interrupción, recupera la operación pendiente. Las partidas, ROM y ajustes del tema quedan fuera de la lista de escritura. La aceptación física desde una microSD limpia sigue pendiente.
+El instalador verifica el modelo, el firmware y el ejecutable original antes de instalar. Prepara y verifica los archivos en la partición de datos y habilita Canica para el siguiente arranque. Al volver a ejecutarlo después de una interrupción, recupera la operación pendiente. Las partidas, ROM y ajustes del tema quedan fuera de la lista de escritura. La prueba física del tema usó la tarjeta habitual de una RG35XX H. El primer arranque del paquete ampliado desde una microSD limpia sigue pendiente.

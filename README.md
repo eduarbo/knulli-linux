@@ -1,6 +1,14 @@
-# KNULLI para la Anbernic RG35XX H · Canica
+# Canica en KNULLI · Anbernic RG35XX H
 
-Este fork conserva la base **KNULLI Scarab del 11 de mayo de 2026** y reúne mejoras para la RG35XX H. La integración de Canica fija el EmulationStation modificado para H700 y proporciona el adaptador de partidas. Puedes instalar Canica sobre la microSD oficial con el instalador de Herramientas. También puedes compilar el motor desde fuentes. **[Instalar Canica en una Anbernic RG35XX H](https://github.com/eduarbo/knulli-linux/blob/main/docs/canica-rg35xx-h.md).**
+Canica organiza tu biblioteca en tarjetas con capturas, vídeos, favoritos y tiempo jugado. Puedes usar Iris o Ámbar sobre **KNULLI Scarab oficial del 11 de mayo de 2026**. El frontend ampliado añade categorías, búsqueda de palabras con la cruceta y acceso directo a partidas.
+
+**El ZIP del tema se distribuye por separado.** Si ya lo tienes, puedes instalarlo copiando una carpeta a tu tarjeta. [Instalar Canica, elegir una variante o volver al menú anterior](docs/canica-rg35xx-h.md)
+
+![Recorrer una biblioteca con Canica Iris en el menú oficial de Scarab](docs/media/canica-oficial.gif)
+
+*Captura de EmulationStation de Scarab en escritorio ARM64 a 640 × 480, con una biblioteca de demostración.*
+
+## Qué aporta este fork
 
 | Componente | Repositorio y función |
 | --- | --- |

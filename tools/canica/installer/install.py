@@ -1,9 +1,11 @@
 """Offline installer launched from the RG35XX H Tools list."""
+from contextlib import contextmanager
 import fcntl
 import hashlib
 import io
 import json
 import os
+import re
 from pathlib import Path, PurePosixPath
 import shutil
 import subprocess
@@ -20,13 +22,45 @@ SERVICE = 'system/services/canica'
 ADAPTER = 'system/configs/emulationstation/resume/emulatorlauncher'
 ADAPTER_SHA = 'e746b025d1079289d176af8645c12a129b98b0bd8acec177a4a5ec2483d73e42'
 PACKAGES = {
+    'canica-1.0.1-rc28-rg35xx-h.zip': 'fff74d3af75fd613954c5e16ae69244bf07501976c3636a7fab74604144d6951',
     'canica-1.0.1-rc27.2-rg35xx-h.zip': 'c1133da6a93a8b94f8126fea8f43d69cdcbde5a4976e4497f85e1b20194b8021',
     'canica-1.0.1-rc27.1-rg35xx-h.zip': '113e8b662fee7083ecd2383600ca6f4cfd7383065088f9def055383be6605828',
 }
-# Only these previous release files changed in RC27.2. Preserve all user edits.
-PREVIOUS = {'system/canica/SHA256SUMS': '63caf5e4d9f8e95d77631cc56b7a404d951f8e94d0578f31d91f2294c25741a2',
- 'system/services/canica': '27928228e36e2db417cf46ac11d674580a7c12efa95ed7e728c986e1cbbc8794',
- 'themes/es-theme-canica/README.md': '32bf92075794123dc9c73349a46a93c0ad3958a6e8d57f50ebd6008d023adce3'}
+# An upgrade may replace an untouched file from a known earlier kit.
+# Each destination digest is paired with its permitted predecessors.
+PREVIOUS = {
+    ('system/canica/SHA256SUMS',
+     '71d4f6ae6249c63941efa237cb63f068dd5a0ecdcbad10d2be0675cdec27429c'): {
+        '63caf5e4d9f8e95d77631cc56b7a404d951f8e94d0578f31d91f2294c25741a2',
+        'a04d84433887d06e3d0bec8d451a0363a2b7744c380c616091012ef52681f62c',
+    },
+    ('system/canica/SHA256SUMS',
+     'a04d84433887d06e3d0bec8d451a0363a2b7744c380c616091012ef52681f62c'): {
+        '63caf5e4d9f8e95d77631cc56b7a404d951f8e94d0578f31d91f2294c25741a2',
+    },
+    ('system/services/canica',
+     '390bc1dcc4e1e4f0875d30c3c56c8d61fc06d7dcc05e566ecb89bd4bb61f2993'): {
+        '27928228e36e2db417cf46ac11d674580a7c12efa95ed7e728c986e1cbbc8794',
+    },
+    ('system/services/canica',
+     '71eca699c971d070e33cb97a9ae1fee11829f6a8c6340cf240b707271b3475c8'): {
+        '27928228e36e2db417cf46ac11d674580a7c12efa95ed7e728c986e1cbbc8794',
+        '390bc1dcc4e1e4f0875d30c3c56c8d61fc06d7dcc05e566ecb89bd4bb61f2993',
+    },
+    ('themes/es-theme-canica/README.md',
+     '1acd949b55259b54399d41d64bc4a1828de7120acf3bcaa12632011d60945631'): {
+        '32bf92075794123dc9c73349a46a93c0ad3958a6e8d57f50ebd6008d023adce3',
+    },
+    ('themes/es-theme-canica/README.md',
+     'ffdc7da73ac53f78922b132c9428d2155f08093fbbf5c1307003bcb17a46deea'): {
+        '1acd949b55259b54399d41d64bc4a1828de7120acf3bcaa12632011d60945631',
+        '32bf92075794123dc9c73349a46a93c0ad3958a6e8d57f50ebd6008d023adce3',
+    },
+    ('themes/es-theme-canica/theme.xml',
+     'f6fcec2b712284c21a107c2694ac0b2f45879fdf577dd357d5f7dcb625fdf142'): {
+        '1c42716796064bfbca89312a2650211f5645a1f2370675eedad86b3d81f4f9f7',
+    },
+}
 
 
 def digest(data):
@@ -37,10 +71,14 @@ def file_digest(path):
     if not path.exists():
         return None
     with path.open('rb') as stream:
-        h = hashlib.sha256()
-        for block in iter(lambda: stream.read(128 * 1024), b''):
-            h.update(block)
-        return h.hexdigest()
+        return stream_digest(stream)
+
+
+def stream_digest(stream):
+    h = hashlib.sha256()
+    for block in iter(lambda: stream.read(128 * 1024), b''):
+        h.update(block)
+    return h.hexdigest()
 
 
 def child(root, name):
@@ -85,6 +123,7 @@ class Console:
             raise ValueError('El menú instalado no coincide con Scarab para la RG35XX H.')
 
 
+@contextmanager
 def read_package(tool):
     with ZipFile(tool) as app:
         adapter = app.read('resume-emulatorlauncher')
@@ -92,39 +131,50 @@ def read_package(tool):
             raise ValueError('Vuelve a copiar el instalador completo.')
         embedded = next((name for name in PACKAGES if name in app.namelist()), None)
         if embedded:
-            data = app.read(embedded)
+            # The sealed embedded ZIP is small. Keeping its compressed bytes seekable
+            # avoids writing a temporary archive to the card or rereading the outer ZIP.
+            stream = io.BytesIO(app.read(embedded))
             expected = PACKAGES[embedded]
         else:
             sibling = next((tool.with_name(n) for n in PACKAGES if tool.with_name(n).is_file()), None)
             if sibling is None:
                 raise ValueError('Copia también el ZIP de Canica para RG35XX H junto al instalador, sin extraerlo.')
-            data = sibling.read_bytes()
+            stream = sibling.open('rb')
             expected = PACKAGES[sibling.name]
-    if digest(data) != expected:
-        raise ValueError('El ZIP está incompleto o pertenece a otra versión. Vuelve a copiarlo.')
-    return ZipFile(io.BytesIO(data)), adapter
+        with stream:
+            if stream_digest(stream) != expected:
+                raise ValueError('El ZIP está incompleto o pertenece a otra versión. Vuelve a copiarlo.')
+            stream.seek(0)
+            with ZipFile(stream) as archive:
+                yield archive, adapter
+
+
+def source(kit, name, adapter):
+    return io.BytesIO(adapter) if name == ADAPTER else kit.open('share/' + name)
 
 
 def changes(root, kit, adapter):
-    files = {name[6:]: kit.read(name) for name in kit.namelist() if name.startswith('share/')}
-    files[ADAPTER] = adapter
+    sizes = {entry.filename[6:]: entry.file_size for entry in kit.infolist()
+             if entry.filename.startswith('share/') and not entry.is_dir()}
+    sizes[ADAPTER] = len(adapter)
     result = []
     custom_adapter = False
-    for name, data in files.items():
+    for name, size in sizes.items():
         if name == ADAPTER and (root / name).is_symlink():
             custom_adapter = True
             continue
         path = child(root, name)
         old = file_digest(path)
-        new = digest(data)
+        with source(kit, name, adapter) as member:
+            new = stream_digest(member)
         if name == ADAPTER and old and (old != new or not os.access(path, os.X_OK)):
             custom_adapter = True
             continue
         if old == new:
             continue
-        if old is not None and old != PREVIOUS.get(name):
+        if old is not None and old not in PREVIOUS.get((name, new), ()):
             raise ValueError('Se conserva tu archivo modificado: ' + name)
-        result.append((name, old, new, data))
+        result.append((name, old, new, size))
     return result, custom_adapter
 
 
@@ -136,6 +186,13 @@ def recover(root, work, console):
     # This reserved directory is ours only when empty or carrying the installer marker.
     if any(work.iterdir()) and not (work / 'installer-v1').is_file():
         raise ValueError('Se conserva la carpeta temporal existente: ' + str(work))
+    owned = {'installer-v1', 'pending.json', 'plan.tmp', 'committed', 'restore'}
+    extras = []
+    for item in work.iterdir():
+        if item.name not in owned and not re.fullmatch(r'(?:old|new)-[0-9]+', item.name):
+            extras.append(item.name)
+        elif item.is_symlink() or not item.is_file():
+            raise ValueError('Se conserva la entrada inesperada en la carpeta temporal: ' + item.name)
     journal = work / 'pending.json'
     if journal.exists():
         state = json.loads(journal.read_text())
@@ -163,8 +220,10 @@ def recover(root, work, console):
         journal.unlink()
     # Discard only installer-owned files. Keep the marker until cleanup is complete.
     for item in work.iterdir():
-        if item.name != 'installer-v1':
+        if item.name != 'installer-v1' and item.name not in extras:
             item.unlink()
+    if extras:
+        raise ValueError('Se conserva el archivo inesperado en la carpeta temporal: ' + ', '.join(sorted(extras)))
     (work / 'installer-v1').unlink(missing_ok=True)
     work.rmdir()
 
@@ -176,18 +235,25 @@ def install(tool, root, console):
     if work.parent.resolve() != work.parent:
         raise ValueError('Se conserva la ruta alternativa de configuración.')
     recover(root, work, console)
-    archive, adapter = read_package(tool)
-    with archive:
+    with read_package(tool) as (archive, adapter):
         files, custom_adapter = changes(root, archive, adapter)
+        commit_files(root, work, console, archive, adapter, files)
+    message = 'Canica está listo. Reinicia la consola y elige es-theme-canica en los ajustes de interfaz.'
+    if custom_adapter:
+        message += ' Se conservó tu adaptador de partidas.'
+    return message
+
+
+def commit_files(root, work, console, archive, adapter, files):
     enabled = 'canica' in console.services()
     if files or not enabled:
-        needed = sum(len(data) + ((root/name).stat().st_size if old else 0) for name, old, new, data in files)
+        needed = sum(size + ((root/name).stat().st_size if old else 0) for name, old, new, size in files)
         if shutil.disk_usage(work.parent).free < needed + 1024 * 1024:
             raise ValueError('Libera espacio en la tarjeta de datos y vuelve a intentarlo.')
         work.mkdir(mode=0o700)
         try:
             (work / 'installer-v1').touch()
-            for index, (name, old, new, data) in enumerate(files):
+            for index, (name, old, new, size) in enumerate(files):
                 dest = child(root, name)
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 if dest.parent.stat().st_dev != work.stat().st_dev:
@@ -195,15 +261,16 @@ def install(tool, root, console):
                 if old:
                     shutil.copy2(dest, work / ('old-' + str(index)))
                 staged = work / ('new-' + str(index))
-                staged.write_bytes(data)
-                staged.chmod(0o755 if name == ADAPTER else 0o644)
+                with source(archive, name, adapter) as member, staged.open('wb') as output:
+                    shutil.copyfileobj(member, output, 128 * 1024)
+                staged.chmod(0o755 if name in (ADAPTER, THEME + "/Preparar fondos de Canica.sh") else 0o644)
             journal = work / 'pending.json'
             pending = work / 'plan.tmp'
             pending.write_text(json.dumps(dict(enabled=enabled, files=[entry[:3] for entry in files])))
             os.sync()
             pending.replace(journal)
             os.sync()
-            for index, (name, old, new, data) in enumerate(files):
+            for index, (name, old, new, size) in enumerate(files):
                 dest = child(root, name)
                 if file_digest(dest) != old:
                     raise ValueError('El archivo cambió durante la instalación: ' + name)
@@ -217,10 +284,6 @@ def install(tool, root, console):
             os.sync()
         finally:
             recover(root, work, console)
-    message = 'Canica está listo. Reinicia la consola y elige es-theme-canica en los ajustes de interfaz.'
-    if custom_adapter:
-        message += ' Se conservó tu adaptador de partidas.'
-    return message
 
 
 def report(message):
