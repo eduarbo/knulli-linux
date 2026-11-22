@@ -1,10 +1,10 @@
 # KNULLI para la Anbernic RG35XX H · Canica
 
-Este fork conserva la base **KNULLI Scarab del 11 de mayo de 2026** y reúne mejoras para la RG35XX H. La integración de Canica fija el EmulationStation modificado para H700 y proporciona el adaptador de partidas. Puedes instalar Canica sobre la microSD oficial con el ZIP de la candidata o compilar el motor desde fuentes. **[Instalar Canica en una Anbernic RG35XX H](https://github.com/eduarbo/knulli-linux/blob/scarab-20260511-fixes/docs/canica-rg35xx-h.md).**
+Este fork conserva la base **KNULLI Scarab del 11 de mayo de 2026** y reúne mejoras para la RG35XX H. La integración de Canica fija el EmulationStation modificado para H700 y proporciona el adaptador de partidas. Puedes instalar Canica sobre la microSD oficial con el ZIP de la candidata o compilar el motor desde fuentes. **[Instalar Canica en una Anbernic RG35XX H](https://github.com/eduarbo/knulli-linux/blob/main/docs/canica-rg35xx-h.md).**
 
 | Componente | Repositorio y función |
 | --- | --- |
-| Firmware y partidas | [Rama Canica de este fork](https://github.com/eduarbo/knulli-linux/tree/canica-scarab-20260511) · receta H700, preparación del kit y adaptador |
+| Firmware y partidas | [Firmware en `main`](https://github.com/eduarbo/knulli-linux/tree/main) · receta H700, preparación del kit y adaptador |
 | Menú que ejecuta el tema | [Fork de EmulationStation](https://github.com/eduarbo/batocera-emulationstation) · tarjetas, navegación, vídeo y búsqueda con cruceta |
 | Herramientas para Scarab | [knulli-console-bundles](https://github.com/eduarbo/knulli-console-bundles) · compilación ARM64, servicio reversible y paquetes de correcciones |
 
