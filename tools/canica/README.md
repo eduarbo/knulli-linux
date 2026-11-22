@@ -9,8 +9,11 @@ Esta guía reproduce el frontend de Canica sobre **KNULLI Scarab del 11 de mayo 
 Necesitas Git, Python 3, Bash y Docker con Linux ARM64. Descarga la [imagen oficial de Scarab para RG35XX-H](https://github.com/knulli-cfw/knulli-linux/releases/tag/20260511). Trabaja en un directorio nuevo. El instalador y la imagen se comprueban en el equipo donde compilas.
 
 ```sh
-git clone --depth 1 --filter=blob:none --sparse --branch canica-scarab-20260511 https://github.com/eduarbo/knulli-linux.git firmware
+git init -q firmware
+git -C firmware remote add origin https://github.com/eduarbo/knulli-linux.git
 git -C firmware sparse-checkout set tools/canica
+git -C firmware fetch --depth 1 --filter=blob:none origin d315657339ec64848a1e2d9a3a0d3849edaa4a3c
+git -C firmware checkout -q --detach FETCH_HEAD
 git clone --single-branch --branch canica-scarab-build https://github.com/eduarbo/batocera-emulationstation.git frontend
 git -C frontend checkout --detach 8ad22d6d1fa27ec9b9dafef6f8613adb868c67d4
 git -C frontend submodule update --init --recursive
