@@ -10,13 +10,13 @@ Captured on my RG35XX H with the handheld set to Spanish. **Iris is on the left,
 
 ### Battle Garegga in portrait
 
-[![Battle Garegga in portrait](media/canica/previews/arcade-tate.gif)](media/canica/arcade-tate.gif)
+<p><a href="media/canica/iris/arcade-tate.gif"><img src="media/canica/previews/iris/arcade-tate.gif" width="49%" loading="lazy" alt="Battle Garegga in portrait in Iris"></a> <a href="media/canica/ambar/arcade-tate.gif"><img src="media/canica/previews/ambar/arcade-tate.gif" width="49%" loading="lazy" alt="Battle Garegga in portrait in Amber"></a></p>
 
 Watch the screenshot give way to a vertical arcade video inside its card.
 
 ### From Game Boy to Nintendo DS
 
-[![From Game Boy to Nintendo DS](media/canica/previews/consolas.gif)](media/canica/consolas.gif)
+<p><a href="media/canica/iris/consolas.gif"><img src="media/canica/previews/iris/consolas.gif" width="49%" loading="lazy" alt="From Game Boy to Nintendo DS in Iris"></a> <a href="media/canica/ambar/consolas.gif"><img src="media/canica/previews/ambar/consolas.gif" width="49%" loading="lazy" alt="From Game Boy to Nintendo DS in Amber"></a></p>
 
 Browse handheld shelves, their library totals and their playing history.
 
@@ -28,19 +28,19 @@ Move the selection back to Super Metroid Redux. Watch the card markers fade as t
 
 ### Console categories
 
-[![Console categories](media/canica/previews/biblioteca.gif)](media/canica/biblioteca.gif)
+<p><a href="media/canica/iris/biblioteca.gif"><img src="media/canica/previews/iris/biblioteca.gif" width="49%" loading="lazy" alt="Console categories in Iris"></a> <a href="media/canica/ambar/biblioteca.gif"><img src="media/canica/previews/ambar/biblioteca.gif" width="49%" loading="lazy" alt="Console categories in Amber"></a></p>
 
 Press L1 or R1 on Home to change categories. Press Right to focus the console cards.
 
 ### Change systems and pages
 
-[![Change systems and pages](media/canica/previews/gatillos.gif)](media/canica/gatillos.gif)
+<p><a href="media/canica/iris/gatillos.gif"><img src="media/canica/previews/iris/gatillos.gif" width="49%" loading="lazy" alt="Change systems and pages in Iris"></a> <a href="media/canica/ambar/gatillos.gif"><img src="media/canica/previews/ambar/gatillos.gif" width="49%" loading="lazy" alt="Change systems and pages in Amber"></a></p>
 
 In a game list, L1 and R1 switch consoles. L2 and R2 turn the page.
 
 ### Jump by initial
 
-[![Jump by initial](media/canica/previews/letras.gif)](media/canica/letras.gif)
+<p><a href="media/canica/iris/letras.gif"><img src="media/canica/previews/iris/letras.gif" width="49%" loading="lazy" alt="Jump by initial in Iris"></a> <a href="media/canica/ambar/letras.gif"><img src="media/canica/previews/ambar/letras.gif" width="49%" loading="lazy" alt="Jump by initial in Amber"></a></p>
 
 Hold L2 or R2 in a list sorted by name to jump between initials.
 
@@ -76,11 +76,11 @@ A favorite arcade game gives way to another favorite from the Famicom Disk Syste
 
 The panel switches to another game when its preview ends and names the console.
 
-### Adventure Island III to The Punisher
+### History on a console shelf
 
-[![Adventure Island III to The Punisher](media/canica/previews/panel-historial.gif)](media/canica/panel-historial.gif)
+<p><a href="media/canica/iris/panel-historial.gif"><img src="media/canica/previews/iris/panel-historial.gif" width="49%" loading="lazy" alt="History on a console shelf in Iris"></a> <a href="media/canica/ambar/panel-historial.gif"><img src="media/canica/previews/ambar/panel-historial.gif" width="49%" loading="lazy" alt="History on a console shelf in Amber"></a></p>
 
-The Nintendo shelf rotates through games you have played. X launches the one in the panel.
+The console panel cycles through games played on that system.
 
 ### Recently Played
 
@@ -96,7 +96,7 @@ Recently Played, All Games and Chef’s Picks identify both the selected game an
 
 ### Ports and Duke Nukem 3D
 
-[![Ports and Duke Nukem 3D](media/canica/previews/motores.gif)](media/canica/motores.gif)
+<p><a href="media/canica/iris/motores.gif"><img src="media/canica/previews/iris/motores.gif" width="49%" loading="lazy" alt="Ports and Duke Nukem 3D in Iris"></a> <a href="media/canica/ambar/motores.gif"><img src="media/canica/previews/ambar/motores.gif" width="49%" loading="lazy" alt="Ports and Duke Nukem 3D in Amber"></a></p>
 
 Ports draws its background from the collection. Duke Nukem uses its own game art.
 
@@ -154,7 +154,7 @@ Open the game’s media viewer and use the D-pad to browse full-size images.
 
 ### Screenshots in Extras
 
-[![Screenshots in Extras](media/canica/previews/capturas.gif)](media/canica/capturas.gif)
+<p><a href="media/canica/iris/capturas.gif"><img src="media/canica/previews/iris/capturas.gif" width="49%" loading="lazy" alt="Screenshots in Extras in Iris"></a> <a href="media/canica/ambar/capturas.gif"><img src="media/canica/previews/ambar/capturas.gif" width="49%" loading="lazy" alt="Screenshots in Extras in Amber"></a></p>
 
 Open Screenshots, press A for the full image and use the D-pad to move between shots.
 
@@ -166,7 +166,7 @@ Choose a palette, card density, card video behavior, detail image and console pr
 
 ### Volume and brightness
 
-[![Volume and brightness](media/canica/previews/medidores.gif)](media/canica/medidores.gif)
+<p><a href="media/canica/iris/medidores.gif"><img src="media/canica/previews/iris/medidores.gif" width="49%" loading="lazy" alt="Volume and brightness in Iris"></a> <a href="media/canica/ambar/medidores.gif"><img src="media/canica/previews/ambar/medidores.gif" width="49%" loading="lazy" alt="Volume and brightness in Amber"></a></p>
 
 The volume buttons bring up the side meter. Hold FN with the volume buttons to change brightness.
 
@@ -178,11 +178,11 @@ The side panel lists available shortcuts. Press A to open the grid.
 
 ## Four more game cards
 
-### Castle Adventure · MS-DOS
+### Metal Slug · Neo Geo
 
-[![Castle Adventure · MS-DOS](media/canica/previews/castle-adventure.gif)](media/canica/castle-adventure.gif)
+<p><a href="media/canica/iris/metal-slug.gif"><img src="media/canica/previews/iris/metal-slug.gif" width="49%" loading="lazy" alt="Metal Slug · Neo Geo in Iris"></a> <a href="media/canica/ambar/metal-slug.gif"><img src="media/canica/previews/ambar/metal-slug.gif" width="49%" loading="lazy" alt="Metal Slug · Neo Geo in Amber"></a></p>
 
-The selected card plays the DOS capture.
+The selected card plays the Neo Geo run-and-gun in the library.
 
 ### QBasic Nibbles · MS-DOS
 
@@ -196,8 +196,10 @@ Watch the snake move inside the selected card.
 
 The DOS shooter runs in the preview while the library stays visible.
 
-### Tiny Coliseum · PICO-8
+### Metroid Fusion · Game Boy Advance
 
-[![Tiny Coliseum · PICO-8](media/canica/previews/tiny-coliseum.gif)](media/canica/tiny-coliseum.gif)
+<p><a href="media/canica/iris/metroid-fusion.gif"><img src="media/canica/previews/iris/metroid-fusion.gif" width="49%" loading="lazy" alt="Metroid Fusion · Game Boy Advance in Iris"></a> <a href="media/canica/ambar/metroid-fusion.gif"><img src="media/canica/previews/ambar/metroid-fusion.gif" width="49%" loading="lazy" alt="Metroid Fusion · Game Boy Advance in Amber"></a></p>
 
-The PICO-8 preview plays inside the square cartridge grid.
+Watch the GBA game animate inside its card.
+
+The [earlier game-card recordings](https://github.com/eduarbo/knulli-linux/blob/4f78890222a3234596b4d720ac395a2d7ca64603/docs/canica-en-accion.md#four-more-game-cards) cover Castle Adventure, QBasic Nibbles, Kiloblaster and Tiny Coliseum.

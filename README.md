@@ -2,17 +2,17 @@
 
 Browse by console, watch a game inside its card, and pick up from a save you recognize. Real footage from my RG35XX H.
 
-<p><a href="docs/media/canica/iris/elegir-ranura.gif"><img src="docs/media/canica/previews/iris/elegir-ranura.gif" width="49%" loading="lazy" alt="Super Metroid Redux · compare saved scenes in Iris"></a> <a href="docs/media/canica/ambar/elegir-ranura.gif"><img src="docs/media/canica/previews/ambar/elegir-ranura.gif" width="49%" loading="lazy" alt="Super Metroid Redux · compare saved scenes in Amber"></a></p>
+<p><a href="docs/media/canica/iris/metal-slug.gif"><img src="docs/media/canica/previews/iris/metal-slug.gif" width="49%" loading="lazy" alt="Metal Slug · Neo Geo in Iris"></a> <a href="docs/media/canica/ambar/metal-slug.gif"><img src="docs/media/canica/previews/ambar/metal-slug.gif" width="49%" loading="lazy" alt="Metal Slug · Neo Geo in Amber"></a></p>
 
-Move between slots 0 and 1. The screenshot, slot number and save time distinguish the two saves made one minute apart.
+The selected card plays the Neo Geo run-and-gun in the library.
 
 [Install Canica RC30](docs/canica-rg35xx-h.md) · [Watch all the demos](docs/canica-en-accion.md) · [Bring your own ROMs](docs/canica-rg35xx-h.md#bring-your-own-roms) · [My RomM and TV setup](docs/canica-rg35xx-h.md#from-the-handheld-to-a-tv-with-romm)
 
 ## Find a game. Pick a save.
 
-<p><a href="docs/media/canica/iris/fichas.gif"><img src="docs/media/canica/previews/iris/fichas.gif" width="49%" loading="lazy" alt="Super Metroid Redux · in-card video in Iris"></a> <a href="docs/media/canica/ambar/fichas.gif"><img src="docs/media/canica/previews/ambar/fichas.gif" width="49%" loading="lazy" alt="Super Metroid Redux · in-card video in Amber"></a></p>
+<p><a href="docs/media/canica/iris/elegir-ranura.gif"><img src="docs/media/canica/previews/iris/elegir-ranura.gif" width="49%" loading="lazy" alt="Super Metroid Redux · compare saved scenes in Iris"></a> <a href="docs/media/canica/ambar/elegir-ranura.gif"><img src="docs/media/canica/previews/ambar/elegir-ranura.gif" width="49%" loading="lazy" alt="Super Metroid Redux · compare saved scenes in Amber"></a></p>
 
-Move the selection back to Super Metroid Redux. Watch the card markers fade as the video starts.
+Move between slots 0 and 1. The screenshot, slot number and save time distinguish the two saves made one minute apart.
 
 ## From my handheld to my TVs
 
