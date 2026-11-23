@@ -1,30 +1,42 @@
 # Canica for the Anbernic RG35XX H
 
-A handheld game library with in-card gameplay videos, D-pad word completion and visual save slots. Recorded on my RG35XX H.
+Browse by console, watch a game inside its card, and pick up from a save you recognize. Real footage from my RG35XX H.
 
-[![Advance Wars on Game Boy Advance in Amber and Iris](docs/media/canica/previews/home.gif)](docs/media/canica/iris-ambar.gif)
+[![Super Metroid Redux · compare saved scenes — Iris and Amber](docs/media/canica/previews/paired/elegir-ranura.gif)](docs/media/canica/paired/elegir-ranura.gif)
 
-*Advance Wars on Game Boy Advance.* The recording switches between Amber and Iris, large and compact cards, and still and moving previews. **A** plays, **X** picks a save and **Y** searches.
+Move between slots 0 and 1. The screenshot, slot number and save time distinguish the two saves made one minute apart.
 
-[Install Canica RC30](docs/canica-rg35xx-h.md) · [Watch all 32 demos](docs/canica-en-accion.md) · [Bring your own ROMs](docs/canica-rg35xx-h.md#bring-your-own-roms) · [My RomM and TV setup](docs/canica-rg35xx-h.md#from-the-handheld-to-a-tv-with-romm)
+[Install Canica RC30](docs/canica-rg35xx-h.md) · [Watch the demos](docs/canica-en-accion.md) · [Bring your own ROMs](docs/canica-rg35xx-h.md#bring-your-own-roms) · [My RomM and TV setup](docs/canica-rg35xx-h.md#from-the-handheld-to-a-tv-with-romm)
 
-## From Game Boy to the arcade
+## From Game Boy Advance to the arcade
 
-[![Browse Game Boy, Game Boy Advance and Nintendo DS shelves](docs/media/canica/previews/consolas.gif)](docs/media/canica/consolas.gif) [![Battle Garegga playing vertically inside its arcade card](docs/media/canica/previews/arcade-tate.gif)](docs/media/canica/arcade-tate.gif)
+[![Advance Wars on Game Boy Advance](docs/media/canica/iris-ambar.gif)](docs/media/canica/iris-ambar.gif)
 
-Game Boy screenshots keep their green LCD palette. *Battle Garegga* stays upright in its portrait card. **L1 / R1** move from one console to the next without backing out. Open either clip to see the original 640 × 480 screen.
+The Game Boy Advance shelf in action with *Advance Wars*. **L1 / R1** switch consoles in the game list.
+
+[![Battle Garegga in portrait](docs/media/canica/arcade-tate.gif)](docs/media/canica/arcade-tate.gif)
+
+*Battle Garegga* plays upright inside its portrait card.
 
 ## Find a game. Pick a save.
 
-[![Complete a search word using the shoulder buttons](docs/media/canica/previews/buscar.gif)](docs/media/canica/buscar.gif) [![Choose an earlier Adventure Island III save and resume it](docs/media/canica/previews/elegir-ranura.gif)](docs/media/canica/elegir-ranura.gif)
+[![Search the library](docs/media/canica/buscar.gif)](docs/media/canica/buscar.gif)
 
-**Y** opens a keyboard that completes words from your library. **X** opens dated save slots with screenshots. In the second clip, choosing slot 0 takes *Adventure Island III* back to that save even though a newer autosave exists.
+Press **Y** to search using the D-pad. The keyboard suggests words as you type.
+
+[![Super Metroid Redux · in-card video — Iris and Amber](docs/media/canica/previews/paired/fichas.gif)](docs/media/canica/paired/fichas.gif)
+
+Move the selection back to Super Metroid Redux. Watch the card markers fade as the video starts.
 
 ## Rediscover a favorite
 
-[![The Simpsons rotating through Chef’s Picks](docs/media/canica/previews/chef.gif)](docs/media/canica/chef.gif) [![Dragon Ball: Advanced Adventure in the fullscreen media viewer](docs/media/canica/previews/visor.gif)](docs/media/canica/visor.gif)
+[![Chef’s Picks](docs/media/canica/chef.gif)](docs/media/canica/chef.gif)
 
-Chef’s Picks rotates through favorites across systems, including *The Simpsons* in this clip. Open the media viewer for a full-screen look at *Dragon Ball: Advanced Adventure*.
+Chef’s Picks draws from your favorites across systems.
+
+[![Open the media viewer](docs/media/canica/visor.gif)](docs/media/canica/visor.gif)
+
+Use the D-pad to browse full-screen media.
 
 ## From my handheld to my TVs
 
