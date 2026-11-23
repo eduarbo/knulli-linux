@@ -1,273 +1,102 @@
-# Canica en acción
+# Canica in action
 
-Tomas de la pantalla de mi Anbernic RG35XX H a 640 × 480 con el frontend de Canica. El pie bajo cada GIF identifica el control. Abre una demostración para verla. [Instalación y vuelta al menú anterior](canica-rg35xx-h.md)
+[Home](../README.md) · [Install on the RG35XX H](canica-rg35xx-h.md)
 
-## Cuatro juegos en sus tarjetas
+Recorded on my RG35XX H. The small loops show the control in context. Open any preview for the full recording at 640 × 480. The handheld in these recordings uses Spanish.
 
-Al seleccionar un juego, el vídeo empieza dentro de su tarjeta. Estas cuatro tomas se grabaron en la pantalla de la RG35XX H. Pulsa una imagen para verla a tamaño completo.
+[Browse](#browse-the-library) · [Discover](#find-the-next-game) · [Play and save](#start-a-game-or-pick-a-save) · [Customize](#make-the-handheld-your-own) · [More game cards](#four-more-game-cards)
 
-| Castle Adventure · MS-DOS | QBasic Nibbles · MS-DOS |
-| --- | --- |
-| [![Castle Adventure en su tarjeta](media/canica/castle-adventure.gif)](media/canica/castle-adventure.gif) | [![QBasic Nibbles en su tarjeta](media/canica/qbasic-nibbles.gif)](media/canica/qbasic-nibbles.gif) |
-| **Kiloblaster · MS-DOS** | **Tiny Coliseum · PICO-8** |
-| [![Kiloblaster en su tarjeta](media/canica/kiloblaster.gif)](media/canica/kiloblaster.gif) | [![Tiny Coliseum en su tarjeta](media/canica/tiny-coliseum.gif)](media/canica/tiny-coliseum.gif) |
+## Browse the library
 
-## Biblioteca y consolas
+[![Advance Wars in Iris and Amber](media/canica/previews/iris-ambar.gif)](media/canica/iris-ambar.gif) [![Battle Garegga in portrait](media/canica/previews/arcade-tate.gif)](media/canica/arcade-tate.gif)
 
-<details>
-<summary>Categorías con L1 y R1</summary>
+**Advance Wars in Iris and Amber.** Compare the two palettes, card sizes and video settings on Game Boy Advance.<br>
+**Battle Garegga in portrait.** Watch the screenshot give way to a vertical arcade video inside its card.
 
-En Inicio cambia de categoría. Pulsa derecha para enfocar sus tarjetas.
+[![From Game Boy to Nintendo DS](media/canica/previews/consolas.gif)](media/canica/consolas.gif) [![Gameplay takes the focus](media/canica/previews/fichas.gif)](media/canica/fichas.gif)
 
-![Categorías con L1 y R1 en la RG35XX H](media/canica/biblioteca.gif)
+**From Game Boy to Nintendo DS.** Browse handheld shelves, their library totals and their playing history.<br>
+**Gameplay takes the focus.** Rest on a card with a video. The title, stars, heart and save marker fade as playback starts.
 
-</details>
+[![Console categories](media/canica/previews/biblioteca.gif)](media/canica/biblioteca.gif) [![Change systems and pages](media/canica/previews/gatillos.gif)](media/canica/gatillos.gif)
 
-<details>
-<summary>Las tarjetas de cada consola</summary>
+**Console categories.** Press L1 or R1 on Home to change categories. Press Right to focus the console cards.<br>
+**Change systems and pages.** In a game list, L1 and R1 switch consoles. L2 and R2 turn the page.
 
-La ficha reúne el catálogo, los favoritos, los juegos jugados y el historial del sistema seleccionado.
+[![Jump by initial](media/canica/previews/letras.gif)](media/canica/letras.gif) [![Complete words with the D-pad](media/canica/previews/buscar.gif)](media/canica/buscar.gif)
 
-![Las tarjetas de cada consola en la RG35XX H](media/canica/consolas.gif)
+**Jump by initial.** Hold L2 or R2 in a list sorted by name to jump between initials.<br>
+**Complete words with the D-pad.** Press Y to search. L2 inserts the first suggestion. R2 focuses the row, the D-pad chooses a word and A inserts it. START applies the filter.
 
-</details>
+[![A shelf of PICO-8 cartridges](media/canica/previews/pico-8.gif)](media/canica/pico-8.gif) [![Mark a favorite](media/canica/previews/favoritos.gif)](media/canica/favoritos.gif)
 
-<details>
-<summary>Historial de una consola</summary>
+**A shelf of PICO-8 cartridges.** Automatic grid sizing keeps PICO-8 in three columns.<br>
+**Mark a favorite.** Hold A and choose the favorite action. The heart and the library count update together.
 
-La ficha de Nintendo pasa de Adventure Island 3 a The Punisher al terminar el vídeo. X abre el juego visible.
+## Find the next game
 
-![Historial de una consola en la RG35XX H](media/canica/panel-historial.gif)
+[![The Simpsons in Chef’s Picks](media/canica/previews/chef.gif)](media/canica/chef.gif) [![All Games across systems](media/canica/previews/sugerencias.gif)](media/canica/sugerencias.gif)
 
-</details>
+**The Simpsons in Chef’s Picks.** A favorite arcade game gives way to another favorite from the Famicom Disk System.<br>
+**All Games across systems.** The panel switches to another game when its preview ends and names the console.
 
-<details>
-<summary>Fondos de Ports y Duke Nukem 3D</summary>
+[![Adventure Island III to The Punisher](media/canica/previews/panel-historial.gif)](media/canica/panel-historial.gif) [![Recently Played](media/canica/previews/historial.gif)](media/canica/historial.gif)
 
-El fondo de Ports se toma de un juego de la colección. Duke usa las capturas de su propio catálogo.
+**Adventure Island III to The Punisher.** The Nintendo shelf rotates through games you have played. X launches the one in the panel.<br>
+**Recently Played.** History starts with the most recent game and advances when the clip ends.
 
-![Fondos de Ports y Duke Nukem 3D en la RG35XX H](media/canica/motores.gif)
+[![Three collections, one panel](media/canica/previews/colecciones.gif)](media/canica/colecciones.gif) [![Ports and Duke Nukem 3D](media/canica/previews/motores.gif)](media/canica/motores.gif)
 
-</details>
+**Three collections, one panel.** Recently Played, All Games and Chef’s Picks identify both the selected game and its system.<br>
+**Ports and Duke Nukem 3D.** Ports draws its background from the collection. Duke Nukem uses its own game art.
 
-<details>
-<summary>Colecciones de Extras</summary>
+## Start a game or pick a save
 
-Últimos jugados, Todos los juegos y Sugerencias del chef comparten la ficha. Cada sugerencia identifica el juego y su consola.
+[![Save slots at a glance](media/canica/previews/partidas.gif)](media/canica/partidas.gif) [![Back to Oak Forest](media/canica/previews/continuar-nes.gif)](media/canica/continuar-nes.gif)
 
-![Colecciones de Extras en la RG35XX H](media/canica/colecciones.gif)
+**Save slots at a glance.** Press X in the game list. Each slot shows its screenshot and save date.<br>
+**Back to Oak Forest.** A resumes Adventure Island III at the item screen for area 1-3.
 
-</details>
+[![Pick an earlier save](media/canica/previews/elegir-ranura.gif)](media/canica/elegir-ranura.gif) [![Resume from Home](media/canica/previews/fn-a.gif)](media/canica/fn-a.gif)
 
-<details>
-<summary>Rotación en Todos los juegos</summary>
+**Pick an earlier save.** X opens the slots. Choosing slot 0 restores that point even with a newer autosave available.<br>
+**Resume from Home.** Hold FN and press A to launch the last game shown beside the play symbol.
 
-Al terminar la vista previa, el panel presenta otro título de la colección e identifica su consola.
+[![Continue from a console shelf](media/canica/previews/panel-continuar.gif)](media/canica/panel-continuar.gif) [![Launch Ascent with A](media/canica/previews/jugar.gif)](media/canica/jugar.gif)
 
-![Rotación en Todos los juegos en la RG35XX H](media/canica/sugerencias.gif)
+**Continue from a console shelf.** X on the Nintendo panel launches the game it is showing.<br>
+**Launch Ascent with A.** A starts the PICO-8 game directly. The wait between the menu and the game has been shortened in this recording.
 
-</details>
+[![Games with their own save system](media/canica/previews/guardado-interno.gif)](media/canica/guardado-interno.gif)
 
-<details>
-<summary>Sugerencias del chef</summary>
+**Games with their own save system.** The slot picker explains when a system relies on saves made inside the game.
 
-La ficha rota entre los juegos marcados como favoritos. En la toma pasa de Arcade a Famicom Disk System.
+## Make the handheld your own
 
-![Sugerencias del chef en la RG35XX H](media/canica/chef.gif)
+[![Dragon Ball on the fullscreen viewer](media/canica/previews/visor.gif)](media/canica/visor.gif) [![Screenshots in Extras](media/canica/previews/capturas.gif)](media/canica/capturas.gif)
 
-</details>
+**Dragon Ball on the fullscreen viewer.** Open the game’s media viewer and use the D-pad to browse full-size images.<br>
+**Screenshots in Extras.** Open Screenshots, press A for the full image and use the D-pad to move between shots.
 
-<details>
-<summary>Cambio de juego al terminar el vídeo</summary>
+[![Five theme settings](media/canica/previews/ajustes.gif)](media/canica/ajustes.gif) [![Volume and brightness](media/canica/previews/medidores.gif)](media/canica/medidores.gif)
 
-El historial empieza por el título más reciente. Las colecciones de sugerencias eligen en otro orden.
+**Five theme settings.** Choose a palette, card density, card video behavior, detail image and console preview behavior.<br>
+**Volume and brightness.** The volume buttons bring up the side meter. Hold FN with the volume buttons to change brightness.
 
-![Cambio de juego al terminar el vídeo en la RG35XX H](media/canica/historial.gif)
+[![Tools and emulators](media/canica/previews/utilidades.gif)](media/canica/utilidades.gif)
 
-</details>
+**Tools and emulators.** The side panel lists available shortcuts. Press A to open the grid.
 
-## Tarjetas y navegación
+<a name="cuatro-juegos-en-sus-tarjetas"></a>
 
-<details>
-<summary>Vídeo y marcadores</summary>
+## Four more game cards
 
-Detén el foco en un juego con vídeo. El título y las insignias se atenúan mientras se reproduce.
+[![Castle Adventure · MS-DOS](media/canica/previews/castle-adventure.gif)](media/canica/castle-adventure.gif) [![QBasic Nibbles · MS-DOS](media/canica/previews/qbasic-nibbles.gif)](media/canica/qbasic-nibbles.gif)
 
-![Vídeo y marcadores en la RG35XX H](media/canica/fichas.gif)
+**Castle Adventure · MS-DOS.** The selected card plays the DOS capture.<br>
+**QBasic Nibbles · MS-DOS.** Watch the snake move inside the selected card.
 
-</details>
+[![Kiloblaster · MS-DOS](media/canica/previews/kiloblaster.gif)](media/canica/kiloblaster.gif) [![Tiny Coliseum · PICO-8](media/canica/previews/tiny-coliseum.gif)](media/canica/tiny-coliseum.gif)
 
-<details>
-<summary>Vídeo vertical en Arcade TATE</summary>
-
-En Battle Garegga se ve la transición de captura a vídeo en la tarjeta seleccionada.
-
-![Vídeo vertical en Arcade TATE en la RG35XX H](media/canica/arcade-tate.gif)
-
-</details>
-
-<details>
-<summary>Cambiar de consola o de página</summary>
-
-L1 y R1 recorren las consolas. L2 y R2 pasan la página.
-
-![Cambiar de consola o de página en la RG35XX H](media/canica/gatillos.gif)
-
-</details>
-
-<details>
-<summary>Saltar por inicial</summary>
-
-Mantén L2 o R2 en una lista ordenada por nombre.
-
-![Saltar por inicial en la RG35XX H](media/canica/letras.gif)
-
-</details>
-
-<details>
-<summary>PICO-8 en tres columnas</summary>
-
-Con el tamaño de cuadrícula en Automático, los cartuchos se ven en tres columnas.
-
-![PICO-8 en tres columnas en la RG35XX H](media/canica/pico-8.gif)
-
-</details>
-
-<details>
-<summary>Escribir y completar palabras</summary>
-
-Pulsa Y para buscar. L2 inserta la primera propuesta. R2 enfoca las propuestas, la cruceta elige y A inserta. START aplica el filtro.
-
-![Escribir y completar palabras en la RG35XX H](media/canica/buscar.gif)
-
-</details>
-
-<details>
-<summary>Añadir a favoritos</summary>
-
-Mantén A y elige la opción de favoritos. El corazón y el contador reflejan el cambio.
-
-![Añadir a favoritos en la RG35XX H](media/canica/favoritos.gif)
-
-</details>
-
-## Jugar y continuar
-
-<details>
-<summary>Iniciar un juego con A</summary>
-
-Ascent arranca desde la cuadrícula. Se ha recortado la espera entre el menú y el juego.
-
-![Iniciar un juego con A en la RG35XX H](media/canica/jugar.gif)
-
-</details>
-
-<details>
-<summary>Elegir una ranura con X</summary>
-
-Pulsa X para abrir Partidas. Cada ranura muestra la captura a todo lo ancho y su fecha y hora dentro de la tarjeta.
-
-![Elegir una ranura con X en la RG35XX H](media/canica/partidas.gif)
-
-</details>
-
-<details>
-<summary>Retomar Adventure Island III con A</summary>
-
-Este autoguardado abre la selección de objetos de Oak Forest, área 1-3.
-
-![Retomar Adventure Island III con A en la RG35XX H](media/canica/continuar-nes.gif)
-
-</details>
-
-<details>
-<summary>Elegir una partida anterior</summary>
-
-Adventure Island III abre la ranura 0 elegida en Partidas, aunque el automático tiene una hora posterior.
-
-![Elegir una partida anterior en la RG35XX H](media/canica/elegir-ranura.gif)
-
-</details>
-
-<details>
-<summary>Continuar desde la ficha de consola</summary>
-
-Al pulsar X en la ficha de Nintendo, Canica abre el juego que se ve en el panel.
-
-![Continuar desde la ficha de consola en la RG35XX H](media/canica/panel-continuar.gif)
-
-</details>
-
-<details>
-<summary>Juegos que guardan su propio avance</summary>
-
-Cuando un sistema usa guardado interno, Partidas lo indica.
-
-![Juegos que guardan su propio avance en la RG35XX H](media/canica/guardado-interno.gif)
-
-</details>
-
-<details>
-<summary>Continuar desde Inicio con FN + A</summary>
-
-Mantén FN y pulsa A para abrir el título indicado junto al icono de reproducción.
-
-![Continuar desde Inicio con FN + A en la RG35XX H](media/canica/fn-a.gif)
-
-</details>
-
-## Presentación y controles
-
-<details>
-<summary>Galería de capturas</summary>
-
-En Extras abre Capturas. A muestra la imagen completa y la cruceta cambia de toma.
-
-![Galería de capturas en la RG35XX H](media/canica/capturas.gif)
-
-</details>
-
-<details>
-<summary>Lanzadores de Extras</summary>
-
-Herramientas y Emuladores enumeran los accesos disponibles en la ficha. A abre su cuadrícula.
-
-![Lanzadores de Extras en la RG35XX H](media/canica/utilidades.gif)
-
-</details>
-
-<details>
-<summary>Los cinco ajustes del tema</summary>
-
-Abre los ajustes del tema desde los ajustes de interfaz.
-
-![Los cinco ajustes del tema en la RG35XX H](media/canica/ajustes.gif)
-
-</details>
-
-<details>
-<summary>Iris y Ámbar</summary>
-
-Las dos tomas muestran Game Boy Advance en la misma consola, con distinta variante, densidad y preferencia de vídeo.
-
-![Iris y Ámbar en la RG35XX H](media/canica/iris-ambar.gif)
-
-</details>
-
-<details>
-<summary>Visor a pantalla completa</summary>
-
-Abre Visualizar los medios desde las opciones del juego. Recorre las imágenes con la cruceta.
-
-![Visor a pantalla completa en la RG35XX H](media/canica/visor.gif)
-
-</details>
-
-<details>
-<summary>Volumen y brillo</summary>
-
-Usa los botones de volumen. Al mantener FN, los mismos botones cambian el brillo.
-
-![Volumen y brillo en la RG35XX H](media/canica/medidores.gif)
-
-</details>
+**Kiloblaster · MS-DOS.** The DOS shooter runs in the preview while the library stays visible.<br>
+**Tiny Coliseum · PICO-8.** The PICO-8 preview plays inside the square cartridge grid.

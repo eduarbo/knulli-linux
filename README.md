@@ -1,24 +1,42 @@
-# Canica para la Anbernic RG35XX H
+# Canica for the Anbernic RG35XX H
 
-Canica usa mi fork de EmulationStation sobre KNULLI Scarab. Agrupa las consolas por categoría, permite buscar con la cruceta y separa **A · Jugar** de **X · Partidas**. Iris y Ámbar comparten los mismos controles.
+A handheld game library with in-card gameplay videos, D-pad word completion and visual save slots. Recorded on my RG35XX H.
 
-**Para replicar mi consola necesitas el kit de Canica para la RG35XX H.** La guía explica qué archivo copiar, cómo reconocer el menú correcto y cómo volver al anterior. El motor y el instalador son públicos. El tema y su arte se entregan por separado. [Instalación en la RG35XX H](docs/canica-rg35xx-h.md)
+[![Advance Wars on Game Boy Advance in Amber and Iris](docs/media/canica/previews/home.gif)](docs/media/canica/iris-ambar.gif)
 
-![Búsqueda con la cruceta en la RG35XX H](docs/media/canica/buscar.gif)
+*Advance Wars on Game Boy Advance.* The recording switches between Amber and Iris, large and compact cards, and still and moving previews. **A** plays, **X** picks a save and **Y** searches.
 
-[Ver la galería de controles, partidas, vistas previas y ajustes](docs/canica-en-accion.md)
+[Install Canica RC30](docs/canica-rg35xx-h.md) · [Watch all 32 demos](docs/canica-en-accion.md) · [Bring your own ROMs](docs/canica-rg35xx-h.md#bring-your-own-roms) · [My RomM and TV setup](docs/canica-rg35xx-h.md#from-the-handheld-to-a-tv-with-romm)
 
-## Qué aporta este fork
+## From Game Boy to the arcade
 
-| Componente | Repositorio y función |
-| --- | --- |
-| Firmware y partidas | [Firmware en `main`](https://github.com/eduarbo/knulli-linux/tree/main) · receta H700, preparación del kit y adaptador |
-| Menú que ejecuta el tema | [Fork de EmulationStation](https://github.com/eduarbo/batocera-emulationstation) · tarjetas, navegación, vídeo y búsqueda con cruceta |
-| Herramientas para Scarab | [knulli-console-bundles](https://github.com/eduarbo/knulli-console-bundles) · compilación ARM64, servicio reversible y paquetes de correcciones |
+[![Browse Game Boy, Game Boy Advance and Nintendo DS shelves](docs/media/canica/previews/consolas.gif)](docs/media/canica/consolas.gif) [![Battle Garegga playing vertically inside its arcade card](docs/media/canica/previews/arcade-tate.gif)](docs/media/canica/arcade-tate.gif)
 
-**Diferencia frente a Scarab.** La serie `ff02e3d` contiene nueve commits sobre el tag oficial `20260511`, con cambios de suspensión y batería, DraStic, ajustes por juego y Wi-Fi. La integración de Canica `f6a4e9e` acumula **12 commits y 18 archivos modificados** desde ese mismo tag. Los tres posteriores añaden la integración para H700, el instalador desde fuentes, su documentación y el adaptador. La imagen de partida para la instalación documentada es la oficial de la RG35XX H. [Diff de estas revisiones](https://github.com/eduarbo/knulli-linux/compare/c1c7de479e56691c6665723046d9f25500e5ee74...f6a4e9ed39c6cc49c6f5eecbcf08c22a6020ff3a) · [PR de integración](https://github.com/eduarbo/knulli-linux/pull/1)
+Game Boy screenshots keep their green LCD palette. *Battle Garegga* stays upright in its portrait card. **L1 / R1** move from one console to the next without backing out. Open either clip to see the original 640 × 480 screen.
 
-## Proyecto KNULLI original
+## Find a game. Pick a save.
+
+[![Complete a search word using the shoulder buttons](docs/media/canica/previews/buscar.gif)](docs/media/canica/buscar.gif) [![Choose an earlier Adventure Island III save and resume it](docs/media/canica/previews/elegir-ranura.gif)](docs/media/canica/elegir-ranura.gif)
+
+**Y** opens a keyboard that completes words from your library. **X** opens dated save slots with screenshots. In the second clip, choosing slot 0 takes *Adventure Island III* back to that save even though a newer autosave exists.
+
+## Rediscover a favorite
+
+[![The Simpsons rotating through Chef’s Picks](docs/media/canica/previews/chef.gif)](docs/media/canica/chef.gif) [![Dragon Ball: Advanced Adventure in the fullscreen media viewer](docs/media/canica/previews/visor.gif)](docs/media/canica/visor.gif)
+
+Chef’s Picks rotates through favorites across systems, including *The Simpsons* in this clip. Open the media viewer for a full-screen look at *Dragon Ball: Advanced Adventure*.
+
+## From my handheld to my TVs
+
+I sync my handheld library and saves with RomM. My custom TV launchers include a game browser backed by the same library, so I can pick a game on the couch and carry on from a compatible in-game save. Canica runs locally on the handheld. The RomM sync client and TV launchers are separate parts of my setup. [How the handoff works](docs/canica-rg35xx-h.md#from-the-handheld-to-a-tv-with-romm)
+
+## What you need
+
+Canica RC30 pairs the May 11, 2026 KNULLI Scarab image for the **RG35XX H** with my EmulationStation fork, save adapter and theme. Get the theme kit separately; its artwork license is pending. The public installer accepts that kit. The guide covers setup, controls and how to restore the original menu. [Install and verify](docs/canica-rg35xx-h.md) · [Build the frontend](tools/canica/README.md)
+
+This firmware fork carries the H700 integration and save adapter. The [frontend fork](https://github.com/eduarbo/batocera-emulationstation) implements the cards, navigation and search. The [build tools](https://github.com/eduarbo/knulli-console-bundles) provide the ARM64 build and recovery scripts. At `ff02e3d` the firmware had nine commits beyond Scarab, covering suspend, battery, DraStic, per-game settings and Wi-Fi. At integration revision `f6a4e9e`, the difference was 12 commits across 18 files. [Pinned firmware comparison](https://github.com/eduarbo/knulli-linux/compare/c1c7de479e56691c6665723046d9f25500e5ee74...f6a4e9ed39c6cc49c6f5eecbcf08c22a6020ff3a) · [Integration PR](https://github.com/eduarbo/knulli-linux/pull/1)
+
+## Upstream KNULLI
 
 [![Activity](https://img.shields.io/github/commit-activity/m/knulli-cfw/distribution)](https://github.com/knulli-cfw/distribution)
 [![PR](https://img.shields.io/github/issues-pr-closed/knulli-cfw/distribution)](https://github.com/knulli-cfw/distribution)
