@@ -2,41 +2,17 @@
 
 Browse by console, watch a game inside its card, and pick up from a save you recognize. Real footage from my RG35XX H.
 
-[![Super Metroid Redux · compare saved scenes — Iris and Amber](docs/media/canica/previews/paired/elegir-ranura.gif)](docs/media/canica/paired/elegir-ranura.gif)
+<p><a href="docs/media/canica/iris/elegir-ranura.gif"><img src="docs/media/canica/previews/iris/elegir-ranura.gif" width="49%" loading="lazy" alt="Super Metroid Redux · compare saved scenes in Iris"></a> <a href="docs/media/canica/ambar/elegir-ranura.gif"><img src="docs/media/canica/previews/ambar/elegir-ranura.gif" width="49%" loading="lazy" alt="Super Metroid Redux · compare saved scenes in Amber"></a></p>
 
 Move between slots 0 and 1. The screenshot, slot number and save time distinguish the two saves made one minute apart.
 
-[Install Canica RC30](docs/canica-rg35xx-h.md) · [Watch the demos](docs/canica-en-accion.md) · [Bring your own ROMs](docs/canica-rg35xx-h.md#bring-your-own-roms) · [My RomM and TV setup](docs/canica-rg35xx-h.md#from-the-handheld-to-a-tv-with-romm)
-
-## From Game Boy Advance to the arcade
-
-[![Advance Wars on Game Boy Advance](docs/media/canica/iris-ambar.gif)](docs/media/canica/iris-ambar.gif)
-
-The Game Boy Advance shelf in action with *Advance Wars*. **L1 / R1** switch consoles in the game list.
-
-[![Battle Garegga in portrait](docs/media/canica/arcade-tate.gif)](docs/media/canica/arcade-tate.gif)
-
-*Battle Garegga* plays upright inside its portrait card.
+[Install Canica RC30](docs/canica-rg35xx-h.md) · [Watch all the demos](docs/canica-en-accion.md) · [Bring your own ROMs](docs/canica-rg35xx-h.md#bring-your-own-roms) · [My RomM and TV setup](docs/canica-rg35xx-h.md#from-the-handheld-to-a-tv-with-romm)
 
 ## Find a game. Pick a save.
 
-[![Search the library](docs/media/canica/buscar.gif)](docs/media/canica/buscar.gif)
-
-Press **Y** to search using the D-pad. The keyboard suggests words as you type.
-
-[![Super Metroid Redux · in-card video — Iris and Amber](docs/media/canica/previews/paired/fichas.gif)](docs/media/canica/paired/fichas.gif)
+<p><a href="docs/media/canica/iris/fichas.gif"><img src="docs/media/canica/previews/iris/fichas.gif" width="49%" loading="lazy" alt="Super Metroid Redux · in-card video in Iris"></a> <a href="docs/media/canica/ambar/fichas.gif"><img src="docs/media/canica/previews/ambar/fichas.gif" width="49%" loading="lazy" alt="Super Metroid Redux · in-card video in Amber"></a></p>
 
 Move the selection back to Super Metroid Redux. Watch the card markers fade as the video starts.
-
-## Rediscover a favorite
-
-[![Chef’s Picks](docs/media/canica/chef.gif)](docs/media/canica/chef.gif)
-
-Chef’s Picks draws from your favorites across systems.
-
-[![Open the media viewer](docs/media/canica/visor.gif)](docs/media/canica/visor.gif)
-
-Use the D-pad to browse full-screen media.
 
 ## From my handheld to my TVs
 

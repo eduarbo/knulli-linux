@@ -2,17 +2,11 @@
 
 [Home](../README.md) · [Install on the RG35XX H](canica-rg35xx-h.md)
 
-Captured on my RG35XX H with the handheld set to Spanish. In paired recordings, **Iris is on the left and Amber is on the right**. Open a comparison to see each console screen at its native 640 × 480.
+Captured on my RG35XX H with the handheld set to Spanish. **Iris is on the left, Amber on the right.** Each GIF opens independently at 640 × 480. The two runs use the same compact cards, cover art in the details panel and in-card video. The settings demo shows the other options.
 
 [Browse](#browse-the-library) · [Discover](#find-the-next-game) · [Play and save](#start-a-game-or-pick-a-save) · [Customize](#make-the-handheld-your-own) · [More game cards](#four-more-game-cards)
 
 ## Browse the library
-
-### Advance Wars in Iris and Amber
-
-[![Advance Wars in Iris and Amber](media/canica/previews/iris-ambar.gif)](media/canica/iris-ambar.gif)
-
-Compare the two palettes, card sizes and video settings on Game Boy Advance.
 
 ### Battle Garegga in portrait
 
@@ -28,7 +22,7 @@ Browse handheld shelves, their library totals and their playing history.
 
 ### Super Metroid Redux · in-card video
 
-[![Super Metroid Redux · in-card video — Iris and Amber](media/canica/previews/paired/fichas.gif)](media/canica/paired/fichas.gif)
+<p><a href="media/canica/iris/fichas.gif"><img src="media/canica/previews/iris/fichas.gif" width="49%" loading="lazy" alt="Super Metroid Redux · in-card video in Iris"></a> <a href="media/canica/ambar/fichas.gif"><img src="media/canica/previews/ambar/fichas.gif" width="49%" loading="lazy" alt="Super Metroid Redux · in-card video in Amber"></a></p>
 
 Move the selection back to Super Metroid Redux. Watch the card markers fade as the video starts.
 
@@ -110,7 +104,7 @@ Ports draws its background from the collection. Duke Nukem uses its own game art
 
 ### Super Metroid Redux · open the save slots
 
-[![Super Metroid Redux · open the save slots — Iris and Amber](media/canica/previews/paired/partidas.gif)](media/canica/paired/partidas.gif)
+<p><a href="media/canica/iris/partidas.gif"><img src="media/canica/previews/iris/partidas.gif" width="49%" loading="lazy" alt="Super Metroid Redux · open the save slots in Iris"></a> <a href="media/canica/ambar/partidas.gif"><img src="media/canica/previews/ambar/partidas.gif" width="49%" loading="lazy" alt="Super Metroid Redux · open the save slots in Amber"></a></p>
 
 Press X on Super Metroid Redux to see two SNES saves with different scenes, each dated September 10, 2024.
 
@@ -122,7 +116,7 @@ A resumes Adventure Island III at the item screen for area 1-3.
 
 ### Super Metroid Redux · compare saved scenes
 
-[![Super Metroid Redux · compare saved scenes — Iris and Amber](media/canica/previews/paired/elegir-ranura.gif)](media/canica/paired/elegir-ranura.gif)
+<p><a href="media/canica/iris/elegir-ranura.gif"><img src="media/canica/previews/iris/elegir-ranura.gif" width="49%" loading="lazy" alt="Super Metroid Redux · compare saved scenes in Iris"></a> <a href="media/canica/ambar/elegir-ranura.gif"><img src="media/canica/previews/ambar/elegir-ranura.gif" width="49%" loading="lazy" alt="Super Metroid Redux · compare saved scenes in Amber"></a></p>
 
 Move between slots 0 and 1. The screenshot, slot number and save time distinguish the two saves made one minute apart.
 
