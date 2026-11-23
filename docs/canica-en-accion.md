@@ -2,6 +2,16 @@
 
 Tomas de la pantalla de mi Anbernic RG35XX H a 640 × 480 con el frontend de Canica. El pie bajo cada GIF identifica el control. Abre una demostración para verla. [Instalación y vuelta al menú anterior](canica-rg35xx-h.md)
 
+## Cuatro juegos en sus tarjetas
+
+Al seleccionar un juego, el vídeo empieza dentro de su tarjeta. Estas cuatro tomas se grabaron en la pantalla de la RG35XX H. Pulsa una imagen para verla a tamaño completo.
+
+| Castle Adventure · MS-DOS | QBasic Nibbles · MS-DOS |
+| --- | --- |
+| [![Castle Adventure en su tarjeta](media/canica/castle-adventure.gif)](media/canica/castle-adventure.gif) | [![QBasic Nibbles en su tarjeta](media/canica/qbasic-nibbles.gif)](media/canica/qbasic-nibbles.gif) |
+| **Kiloblaster · MS-DOS** | **Tiny Coliseum · PICO-8** |
+| [![Kiloblaster en su tarjeta](media/canica/kiloblaster.gif)](media/canica/kiloblaster.gif) | [![Tiny Coliseum en su tarjeta](media/canica/tiny-coliseum.gif)](media/canica/tiny-coliseum.gif) |
+
 ## Biblioteca y consolas
 
 <details>
