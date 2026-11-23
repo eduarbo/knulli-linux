@@ -8,6 +8,12 @@ Captured on my RG35XX H with the handheld set to Spanish. **Iris is on the left,
 
 ## Browse the library
 
+### Advance Wars · Game Boy Advance
+
+<p><a href="media/canica/iris/iris-ambar.gif"><img src="media/canica/previews/iris/iris-ambar.gif" width="49%" loading="lazy" alt="Advance Wars · Game Boy Advance in Iris"></a> <a href="media/canica/ambar/iris-ambar.gif"><img src="media/canica/previews/ambar/iris-ambar.gif" width="49%" loading="lazy" alt="Advance Wars · Game Boy Advance in Amber"></a></p>
+
+The first Advance Wars gives way to Black Hole Rising and back. Both recordings use compact cards and the game box in the details panel.
+
 ### Battle Garegga in portrait
 
 <p><a href="media/canica/iris/arcade-tate.gif"><img src="media/canica/previews/iris/arcade-tate.gif" width="49%" loading="lazy" alt="Battle Garegga in portrait in Iris"></a> <a href="media/canica/ambar/arcade-tate.gif"><img src="media/canica/previews/ambar/arcade-tate.gif" width="49%" loading="lazy" alt="Battle Garegga in portrait in Amber"></a></p>
@@ -44,37 +50,37 @@ In a game list, L1 and R1 switch consoles. L2 and R2 turn the page.
 
 Hold L2 or R2 in a list sorted by name to jump between initials.
 
-### Complete words with the D-pad
+### Metroid · D-pad search
 
-[![Complete words with the D-pad](media/canica/previews/buscar.gif)](media/canica/buscar.gif)
+<p><a href="media/canica/iris/buscar.gif"><img src="media/canica/previews/iris/buscar.gif" width="49%" loading="lazy" alt="Metroid · D-pad search in Iris"></a> <a href="media/canica/ambar/buscar.gif"><img src="media/canica/previews/ambar/buscar.gif" width="49%" loading="lazy" alt="Metroid · D-pad search in Amber"></a></p>
 
-Press Y to search. L2 inserts the first suggestion. R2 focuses the row, the D-pad chooses a word and A inserts it. START applies the filter.
+Press Y and type a few letters. The keyboard offers words from the library as you type, and L2 inserts the first one. START applies the filter.
 
-### A shelf of PICO-8 cartridges
+### Celeste · PICO-8
 
-[![A shelf of PICO-8 cartridges](media/canica/previews/pico-8.gif)](media/canica/pico-8.gif)
+<p><a href="media/canica/iris/pico-8.gif"><img src="media/canica/previews/iris/pico-8.gif" width="49%" loading="lazy" alt="Celeste · PICO-8 in Iris"></a> <a href="media/canica/ambar/pico-8.gif"><img src="media/canica/previews/ambar/pico-8.gif" width="49%" loading="lazy" alt="Celeste · PICO-8 in Amber"></a></p>
 
-Automatic grid sizing keeps PICO-8 in three columns.
+Celeste appears in the three-column cartridge grid.
 
-### Mark a favorite
+### Metroid Fusion · mark a favorite
 
-[![Mark a favorite](media/canica/previews/favoritos.gif)](media/canica/favoritos.gif)
+<p><a href="media/canica/iris/favoritos.gif"><img src="media/canica/previews/iris/favoritos.gif" width="49%" loading="lazy" alt="Metroid Fusion · mark a favorite in Iris"></a> <a href="media/canica/ambar/favoritos.gif"><img src="media/canica/previews/ambar/favoritos.gif" width="49%" loading="lazy" alt="Metroid Fusion · mark a favorite in Amber"></a></p>
 
-Hold A and choose the favorite action. The heart and the library count update together.
+Hold A and choose the favorite action. The heart and the library count update together, and the card joins the favorites at the top of the list.
 
 ## Find the next game
 
-### The Simpsons in Chef’s Picks
+### Chef’s Picks
 
-[![The Simpsons in Chef’s Picks](media/canica/previews/chef.gif)](media/canica/chef.gif)
+<p><a href="media/canica/iris/chef.gif"><img src="media/canica/previews/iris/chef.gif" width="49%" loading="lazy" alt="Chef’s Picks in Iris"></a> <a href="media/canica/ambar/chef.gif"><img src="media/canica/previews/ambar/chef.gif" width="49%" loading="lazy" alt="Chef’s Picks in Amber"></a></p>
 
-A favorite arcade game gives way to another favorite from the Famicom Disk System.
+The favorites panel names each game and its system as the selection changes. The picks are shuffled, so each run shows different favorites.
 
 ### All Games across systems
 
-[![All Games across systems](media/canica/previews/sugerencias.gif)](media/canica/sugerencias.gif)
+<p><a href="media/canica/iris/sugerencias.gif"><img src="media/canica/previews/iris/sugerencias.gif" width="49%" loading="lazy" alt="All Games across systems in Iris"></a> <a href="media/canica/ambar/sugerencias.gif"><img src="media/canica/previews/ambar/sugerencias.gif" width="49%" loading="lazy" alt="All Games across systems in Amber"></a></p>
 
-The panel switches to another game when its preview ends and names the console.
+The panel switches to another game when its preview ends and names the console. All Games shuffles the library, so each run shows different games.
 
 ### History on a console shelf
 
@@ -84,15 +90,15 @@ The console panel cycles through games played on that system.
 
 ### Recently Played
 
-[![Recently Played](media/canica/previews/historial.gif)](media/canica/historial.gif)
+<p><a href="media/canica/iris/historial.gif"><img src="media/canica/previews/iris/historial.gif" width="49%" loading="lazy" alt="Recently Played in Iris"></a> <a href="media/canica/ambar/historial.gif"><img src="media/canica/previews/ambar/historial.gif" width="49%" loading="lazy" alt="Recently Played in Amber"></a></p>
 
 History starts with the most recent game and advances when the clip ends.
 
 ### Three collections, one panel
 
-[![Three collections, one panel](media/canica/previews/colecciones.gif)](media/canica/colecciones.gif)
+<p><a href="media/canica/iris/colecciones.gif"><img src="media/canica/previews/iris/colecciones.gif" width="49%" loading="lazy" alt="Three collections, one panel in Iris"></a> <a href="media/canica/ambar/colecciones.gif"><img src="media/canica/previews/ambar/colecciones.gif" width="49%" loading="lazy" alt="Three collections, one panel in Amber"></a></p>
 
-Recently Played, All Games and Chef’s Picks identify both the selected game and its system.
+Recently Played, All Games and Chef’s Picks identify both the selected game and its system. The last two are shuffled, so they differ between runs.
 
 ### Ports and Duke Nukem 3D
 
@@ -108,11 +114,11 @@ Ports draws its background from the collection. Duke Nukem uses its own game art
 
 Press X on Super Metroid Redux to see two SNES saves with different scenes, each dated September 10, 2024.
 
-### Back to Oak Forest
+### Super Metroid Redux · resume with A
 
-[![Back to Oak Forest](media/canica/previews/continuar-nes.gif)](media/canica/continuar-nes.gif)
+<p><a href="media/canica/iris/continuar-nes.gif"><img src="media/canica/previews/iris/continuar-nes.gif" width="49%" loading="lazy" alt="Super Metroid Redux · resume with A in Iris"></a> <a href="media/canica/ambar/continuar-nes.gif"><img src="media/canica/previews/ambar/continuar-nes.gif" width="49%" loading="lazy" alt="Super Metroid Redux · resume with A in Amber"></a></p>
 
-A resumes Adventure Island III at the item screen for area 1-3.
+Press A on the selected game to resume the most recent compatible save.
 
 ### Super Metroid Redux · compare saved scenes
 
@@ -120,35 +126,41 @@ A resumes Adventure Island III at the item screen for area 1-3.
 
 Move between slots 0 and 1. The screenshot, slot number and save time distinguish the two saves made one minute apart.
 
+### Super Metroid Redux · load a manual save
+
+<p><a href="media/canica/iris/cargar.gif"><img src="media/canica/previews/iris/cargar.gif" width="49%" loading="lazy" alt="Super Metroid Redux · load a manual save in Iris"></a> <a href="media/canica/ambar/cargar.gif"><img src="media/canica/previews/ambar/cargar.gif" width="49%" loading="lazy" alt="Super Metroid Redux · load a manual save in Amber"></a></p>
+
+Choose a dated slot with A. The emulator opens at the saved scene.
+
 ### Resume from Home
 
-[![Resume from Home](media/canica/previews/fn-a.gif)](media/canica/fn-a.gif)
+<p><a href="media/canica/iris/fn-a.gif"><img src="media/canica/previews/iris/fn-a.gif" width="49%" loading="lazy" alt="Resume from Home in Iris"></a> <a href="media/canica/ambar/fn-a.gif"><img src="media/canica/previews/ambar/fn-a.gif" width="49%" loading="lazy" alt="Resume from Home in Amber"></a></p>
 
 Hold FN and press A to launch the last game shown beside the play symbol.
 
 ### Continue from a console shelf
 
-[![Continue from a console shelf](media/canica/previews/panel-continuar.gif)](media/canica/panel-continuar.gif)
+<p><a href="media/canica/iris/panel-continuar.gif"><img src="media/canica/previews/iris/panel-continuar.gif" width="49%" loading="lazy" alt="Continue from a console shelf in Iris"></a> <a href="media/canica/ambar/panel-continuar.gif"><img src="media/canica/previews/ambar/panel-continuar.gif" width="49%" loading="lazy" alt="Continue from a console shelf in Amber"></a></p>
 
-X on the Nintendo panel launches the game it is showing.
+X on the Super Nintendo shelf launches the game its panel is showing.
 
-### Launch Ascent with A
+### Celeste · launch with A
 
-[![Launch Ascent with A](media/canica/previews/jugar.gif)](media/canica/jugar.gif)
+<p><a href="media/canica/iris/jugar.gif"><img src="media/canica/previews/iris/jugar.gif" width="49%" loading="lazy" alt="Celeste · launch with A in Iris"></a> <a href="media/canica/ambar/jugar.gif"><img src="media/canica/previews/ambar/jugar.gif" width="49%" loading="lazy" alt="Celeste · launch with A in Amber"></a></p>
 
 A starts the PICO-8 game directly. The wait between the menu and the game has been shortened in this recording.
 
 ### Games with their own save system
 
-[![Games with their own save system](media/canica/previews/guardado-interno.gif)](media/canica/guardado-interno.gif)
+<p><a href="media/canica/iris/guardado-interno.gif"><img src="media/canica/previews/iris/guardado-interno.gif" width="49%" loading="lazy" alt="Games with their own save system in Iris"></a> <a href="media/canica/ambar/guardado-interno.gif"><img src="media/canica/previews/ambar/guardado-interno.gif" width="49%" loading="lazy" alt="Games with their own save system in Amber"></a></p>
 
 The slot picker explains when a system relies on saves made inside the game.
 
 ## Make the handheld your own
 
-### Dragon Ball on the fullscreen viewer
+### Metroid Fusion · fullscreen media viewer
 
-[![Dragon Ball on the fullscreen viewer](media/canica/previews/visor.gif)](media/canica/visor.gif)
+<p><a href="media/canica/iris/visor.gif"><img src="media/canica/previews/iris/visor.gif" width="49%" loading="lazy" alt="Metroid Fusion · fullscreen media viewer in Iris"></a> <a href="media/canica/ambar/visor.gif"><img src="media/canica/previews/ambar/visor.gif" width="49%" loading="lazy" alt="Metroid Fusion · fullscreen media viewer in Amber"></a></p>
 
 Open the game’s media viewer and use the D-pad to browse full-size images.
 
@@ -160,7 +172,7 @@ Open Screenshots, press A for the full image and use the D-pad to move between s
 
 ### Five theme settings
 
-[![Five theme settings](media/canica/previews/ajustes.gif)](media/canica/ajustes.gif)
+<p><a href="media/canica/iris/ajustes.gif"><img src="media/canica/previews/iris/ajustes.gif" width="49%" loading="lazy" alt="Five theme settings in Iris"></a> <a href="media/canica/ambar/ajustes.gif"><img src="media/canica/previews/ambar/ajustes.gif" width="49%" loading="lazy" alt="Five theme settings in Amber"></a></p>
 
 Choose a palette, card density, card video behavior, detail image and console preview behavior.
 
@@ -172,7 +184,7 @@ The volume buttons bring up the side meter. Hold FN with the volume buttons to c
 
 ### Tools and emulators
 
-[![Tools and emulators](media/canica/previews/utilidades.gif)](media/canica/utilidades.gif)
+<p><a href="media/canica/iris/utilidades.gif"><img src="media/canica/previews/iris/utilidades.gif" width="49%" loading="lazy" alt="Tools and emulators in Iris"></a> <a href="media/canica/ambar/utilidades.gif"><img src="media/canica/previews/ambar/utilidades.gif" width="49%" loading="lazy" alt="Tools and emulators in Amber"></a></p>
 
 The side panel lists available shortcuts. Press A to open the grid.
 
@@ -184,17 +196,17 @@ The side panel lists available shortcuts. Press A to open the grid.
 
 The selected card plays the Neo Geo run-and-gun in the library.
 
-### QBasic Nibbles · MS-DOS
+### Link’s Awakening · Game Boy Color
 
-[![QBasic Nibbles · MS-DOS](media/canica/previews/qbasic-nibbles.gif)](media/canica/qbasic-nibbles.gif)
+<p><a href="media/canica/iris/links-awakening.gif"><img src="media/canica/previews/iris/links-awakening.gif" width="49%" loading="lazy" alt="Link’s Awakening · Game Boy Color in Iris"></a> <a href="media/canica/ambar/links-awakening.gif"><img src="media/canica/previews/ambar/links-awakening.gif" width="49%" loading="lazy" alt="Link’s Awakening · Game Boy Color in Amber"></a></p>
 
-Watch the snake move inside the selected card.
+Browse the handheld Zelda games and watch the selected preview.
 
-### Kiloblaster · MS-DOS
+### Chrono Trigger · Super Nintendo
 
-[![Kiloblaster · MS-DOS](media/canica/previews/kiloblaster.gif)](media/canica/kiloblaster.gif)
+<p><a href="media/canica/iris/chrono-trigger.gif"><img src="media/canica/previews/iris/chrono-trigger.gif" width="49%" loading="lazy" alt="Chrono Trigger · Super Nintendo in Iris"></a> <a href="media/canica/ambar/chrono-trigger.gif"><img src="media/canica/previews/ambar/chrono-trigger.gif" width="49%" loading="lazy" alt="Chrono Trigger · Super Nintendo in Amber"></a></p>
 
-The DOS shooter runs in the preview while the library stays visible.
+Watch the selected SNES preview in the library.
 
 ### Metroid Fusion · Game Boy Advance
 

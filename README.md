@@ -8,11 +8,35 @@ The selected card plays the Neo Geo run-and-gun in the library.
 
 [Install Canica RC30](docs/canica-rg35xx-h.md) · [Watch all the demos](docs/canica-en-accion.md) · [Bring your own ROMs](docs/canica-rg35xx-h.md#bring-your-own-roms) · [My RomM and TV setup](docs/canica-rg35xx-h.md#from-the-handheld-to-a-tv-with-romm)
 
+## From Game Boy Advance to the arcade
+
+<p><a href="docs/media/canica/iris/iris-ambar.gif"><img src="docs/media/canica/previews/iris/iris-ambar.gif" width="49%" loading="lazy" alt="Advance Wars on Game Boy Advance in Iris"></a> <a href="docs/media/canica/ambar/iris-ambar.gif"><img src="docs/media/canica/previews/ambar/iris-ambar.gif" width="49%" loading="lazy" alt="Advance Wars on Game Boy Advance in Amber"></a></p>
+
+The Game Boy Advance shelf in action with *Advance Wars*. **L1 / R1** switch consoles in the game list.
+
+<p><a href="docs/media/canica/iris/arcade-tate.gif"><img src="docs/media/canica/previews/iris/arcade-tate.gif" width="49%" loading="lazy" alt="Battle Garegga in portrait in Iris"></a> <a href="docs/media/canica/ambar/arcade-tate.gif"><img src="docs/media/canica/previews/ambar/arcade-tate.gif" width="49%" loading="lazy" alt="Battle Garegga in portrait in Amber"></a></p>
+
+*Battle Garegga* plays upright inside its portrait card.
+
 ## Find a game. Pick a save.
+
+<p><a href="docs/media/canica/iris/buscar.gif"><img src="docs/media/canica/previews/iris/buscar.gif" width="49%" loading="lazy" alt="Search the library in Iris"></a> <a href="docs/media/canica/ambar/buscar.gif"><img src="docs/media/canica/previews/ambar/buscar.gif" width="49%" loading="lazy" alt="Search the library in Amber"></a></p>
+
+Press **Y** to search using the D-pad. The keyboard suggests words as you type.
 
 <p><a href="docs/media/canica/iris/elegir-ranura.gif"><img src="docs/media/canica/previews/iris/elegir-ranura.gif" width="49%" loading="lazy" alt="Super Metroid Redux · compare saved scenes in Iris"></a> <a href="docs/media/canica/ambar/elegir-ranura.gif"><img src="docs/media/canica/previews/ambar/elegir-ranura.gif" width="49%" loading="lazy" alt="Super Metroid Redux · compare saved scenes in Amber"></a></p>
 
 Move between slots 0 and 1. The screenshot, slot number and save time distinguish the two saves made one minute apart.
+
+## Rediscover a favorite
+
+<p><a href="docs/media/canica/iris/chef.gif"><img src="docs/media/canica/previews/iris/chef.gif" width="49%" loading="lazy" alt="Chef’s Picks in Iris"></a> <a href="docs/media/canica/ambar/chef.gif"><img src="docs/media/canica/previews/ambar/chef.gif" width="49%" loading="lazy" alt="Chef’s Picks in Amber"></a></p>
+
+Chef’s Picks draws from your favorites across systems, in a new order every time.
+
+<p><a href="docs/media/canica/iris/visor.gif"><img src="docs/media/canica/previews/iris/visor.gif" width="49%" loading="lazy" alt="Open the media viewer in Iris"></a> <a href="docs/media/canica/ambar/visor.gif"><img src="docs/media/canica/previews/ambar/visor.gif" width="49%" loading="lazy" alt="Open the media viewer in Amber"></a></p>
+
+Use the D-pad to browse full-screen media.
 
 ## From my handheld to my TVs
 
