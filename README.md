@@ -1,52 +1,8 @@
-# Canica for the Anbernic RG35XX H
+# KNULLI firmware fork for Canica
 
-Browse by console, watch a game inside its card, and pick up from a save you recognize. Real footage from my RG35XX H.
+This fork carries the firmware side of [Canica](https://github.com/eduarbo/canica), my game library for the Anbernic RG35XX H: fixes for suspend, battery, DraStic, per-game settings and Wi-Fi on top of KNULLI Scarab, and the four EmulationStation packaging patches. Canica's home page, recordings, guides, installer and releases live in **[eduarbo/canica](https://github.com/eduarbo/canica)**.
 
-<p><a href="docs/media/canica/iris/metal-slug.gif"><img src="docs/media/canica/previews/iris/metal-slug.gif" width="49%" loading="lazy" alt="Metal Slug · Neo Geo in Iris"></a> <a href="docs/media/canica/ambar/metal-slug.gif"><img src="docs/media/canica/previews/ambar/metal-slug.gif" width="49%" loading="lazy" alt="Metal Slug · Neo Geo in Amber"></a></p>
-
-The selected card plays the Neo Geo run-and-gun in the library.
-
-[Install Canica RC30.1](docs/canica-rg35xx-h.md) · [Watch all the demos](docs/canica-en-accion.md) · [Bring your own ROMs](docs/canica-rg35xx-h.md#bring-your-own-roms) · [My RomM and TV setup](docs/canica-rg35xx-h.md#from-the-handheld-to-a-tv-with-romm)
-
-## From Game Boy Advance to the arcade
-
-<p><a href="docs/media/canica/iris/iris-ambar.gif"><img src="docs/media/canica/previews/iris/iris-ambar.gif" width="49%" loading="lazy" alt="Advance Wars on Game Boy Advance in Iris"></a> <a href="docs/media/canica/ambar/iris-ambar.gif"><img src="docs/media/canica/previews/ambar/iris-ambar.gif" width="49%" loading="lazy" alt="Advance Wars on Game Boy Advance in Amber"></a></p>
-
-The Game Boy Advance shelf in action with *Advance Wars*. **L1 / R1** switch consoles in the game list.
-
-<p><a href="docs/media/canica/iris/arcade-tate.gif"><img src="docs/media/canica/previews/iris/arcade-tate.gif" width="49%" loading="lazy" alt="Battle Garegga in portrait in Iris"></a> <a href="docs/media/canica/ambar/arcade-tate.gif"><img src="docs/media/canica/previews/ambar/arcade-tate.gif" width="49%" loading="lazy" alt="Battle Garegga in portrait in Amber"></a></p>
-
-*Battle Garegga* plays upright inside its portrait card.
-
-## Find a game. Pick a save.
-
-<p><a href="docs/media/canica/iris/buscar.gif"><img src="docs/media/canica/previews/iris/buscar.gif" width="49%" loading="lazy" alt="Search the library in Iris"></a> <a href="docs/media/canica/ambar/buscar.gif"><img src="docs/media/canica/previews/ambar/buscar.gif" width="49%" loading="lazy" alt="Search the library in Amber"></a></p>
-
-Press **Y** to search using the D-pad. The keyboard suggests words as you type.
-
-<p><a href="docs/media/canica/iris/elegir-ranura.gif"><img src="docs/media/canica/previews/iris/elegir-ranura.gif" width="49%" loading="lazy" alt="Super Metroid Redux · compare saved scenes in Iris"></a> <a href="docs/media/canica/ambar/elegir-ranura.gif"><img src="docs/media/canica/previews/ambar/elegir-ranura.gif" width="49%" loading="lazy" alt="Super Metroid Redux · compare saved scenes in Amber"></a></p>
-
-Move between slots 0 and 1. The screenshot, slot number and save time distinguish the two saves made one minute apart.
-
-## Rediscover a favorite
-
-<p><a href="docs/media/canica/iris/chef.gif"><img src="docs/media/canica/previews/iris/chef.gif" width="49%" loading="lazy" alt="Chef’s Picks in Iris"></a> <a href="docs/media/canica/ambar/chef.gif"><img src="docs/media/canica/previews/ambar/chef.gif" width="49%" loading="lazy" alt="Chef’s Picks in Amber"></a></p>
-
-Chef’s Picks draws from your favorites across systems, in a new order every time.
-
-<p><a href="docs/media/canica/iris/visor.gif"><img src="docs/media/canica/previews/iris/visor.gif" width="49%" loading="lazy" alt="Open the media viewer in Iris"></a> <a href="docs/media/canica/ambar/visor.gif"><img src="docs/media/canica/previews/ambar/visor.gif" width="49%" loading="lazy" alt="Open the media viewer in Amber"></a></p>
-
-Use the D-pad to browse full-screen media.
-
-## From my handheld to my TVs
-
-I sync my handheld library and saves with RomM. My custom TV launchers include a game browser backed by the same library, so I can pick a game on the couch and carry on from a compatible in-game save. Canica runs locally on the handheld. The RomM sync client and TV launchers are separate parts of my setup. [How the handoff works](docs/canica-rg35xx-h.md#from-the-handheld-to-a-tv-with-romm)
-
-## What you need
-
-Canica RC30.1 pairs the May 11, 2026 KNULLI Scarab image for the **RG35XX H** with my EmulationStation fork, save adapter and theme. Get the theme kit separately. The theme and its artwork are licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), and the project's own code under the MIT License; the kit includes both texts. The public installer accepts that kit. The guide covers setup, controls and how to restore the original menu. [Install and verify](docs/canica-rg35xx-h.md) · [Build the frontend](tools/canica/README.md)
-
-This firmware fork carries the H700 integration and save adapter. The [frontend fork](https://github.com/eduarbo/batocera-emulationstation) implements the cards, navigation and search. The [build tools](https://github.com/eduarbo/knulli-console-bundles) provide the ARM64 build and recovery scripts. At `ff02e3d` the firmware had nine commits beyond Scarab, covering suspend, battery, DraStic, per-game settings and Wi-Fi. At integration revision `f6a4e9e`, the difference was 12 commits across 18 files. [Pinned firmware comparison](https://github.com/eduarbo/knulli-linux/compare/c1c7de479e56691c6665723046d9f25500e5ee74...f6a4e9ed39c6cc49c6f5eecbcf08c22a6020ff3a) · [Integration PR](https://github.com/eduarbo/knulli-linux/pull/1)
+The [frontend fork](https://github.com/eduarbo/batocera-emulationstation) implements the cards, navigation and search. The [build tools](https://github.com/eduarbo/knulli-console-bundles) provide the ARM64 build, the signed fix bundles and the kit updates. At `ff02e3d` the firmware had nine commits beyond Scarab, covering suspend, battery, DraStic, per-game settings and Wi-Fi. At integration revision `f6a4e9e`, the difference was 12 commits across 18 files. [Pinned firmware comparison](https://github.com/eduarbo/knulli-linux/compare/c1c7de479e56691c6665723046d9f25500e5ee74...f6a4e9ed39c6cc49c6f5eecbcf08c22a6020ff3a) · [Integration PR](https://github.com/eduarbo/knulli-linux/pull/1)
 
 ## Upstream KNULLI
 
