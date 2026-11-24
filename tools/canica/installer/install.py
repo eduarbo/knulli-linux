@@ -22,6 +22,7 @@ SERVICE = 'system/services/canica'
 ADAPTER = 'system/configs/emulationstation/resume/emulatorlauncher'
 ADAPTER_SHA = '4e36929f93928371f3d151fa7cd71b3198b9246b2fd74a0bd0d5870874613b8e'
 PACKAGES = {
+    'canica-1.0.1-rc30.1-rg35xx-h.zip': '0c30b3ac04a102a0355796114d3614db6ec6583326d6c31994946f350569c327',
     'canica-1.0.1-rc30-rg35xx-h.zip': '10005c911c49fa46312f734874ef78148dec1b8e4b9f829987bc8c98e169f727',
     'canica-1.0.1-rc29.1-rg35xx-h.zip': '5f6e44e0ef228a0d2062b3cc2555730c44d5e3a331e66160d0530fe8d4e11504',
     'canica-1.0.1-rc29-rg35xx-h.zip': 'e7a76df26626d5f1b36da884bb83e697d0202424a8b68b88419cf9d045e2f50b',
@@ -32,6 +33,38 @@ PACKAGES = {
 # An upgrade may replace an untouched file from a known earlier kit.
 # Each destination digest is paired with its permitted predecessors.
 PREVIOUS = {
+    # RC30.1 changes only the notices, the theme guide and the inventory the service seals.
+    ('system/canica/SHA256SUMS',
+     'c95c8620a394f241a2e1f9a403b6816ab0de2e8f67d58eb37961f565151957c0'): {
+        '2b311fdffadd2e464101d2bbf40cc4fc2548f1aa62bc239bac68a3dcbf050107',
+        '3375eb0db2b58c67df329805dadb27cc82489a11781838e9c1638bf625ac2015',
+        '575482d4cdfe578cc7660e4a093f57a2e1c3004684d963f30e3852974708f7a1',
+        '63caf5e4d9f8e95d77631cc56b7a404d951f8e94d0578f31d91f2294c25741a2',
+        '71d4f6ae6249c63941efa237cb63f068dd5a0ecdcbad10d2be0675cdec27429c',
+        'a04d84433887d06e3d0bec8d451a0363a2b7744c380c616091012ef52681f62c',
+    },
+    ('system/canica/avisos/Canica.md',
+     '978ca110351178dbd4fda0a56abb90487e5d5e9f41c94e958c91155d69c2fb83'): {
+        'b7429afaff02da2429968bc6aa874f69eff30cfcf28ac5aed028da077c6c492e',
+    },
+    ('system/services/canica',
+     '9fb19f5567231117339d951a72117a69901c87426b92ac69b6033c7cbe95e092'): {
+        '27928228e36e2db417cf46ac11d674580a7c12efa95ed7e728c986e1cbbc8794',
+        '2d834b0414ff1fca8378a617ac6a2b50f8589ea3dec5baa573d48900e148c7cd',
+        '390bc1dcc4e1e4f0875d30c3c56c8d61fc06d7dcc05e566ecb89bd4bb61f2993',
+        '71eca699c971d070e33cb97a9ae1fee11829f6a8c6340cf240b707271b3475c8',
+        'ffafa4c743a60732b553a376247e158f4ae65be8a063c7899dcd296d04051dc2',
+        'ffdf96c6d9cb19f2d0845d178270b617949536ec88641725ec3134d214c0c4f1',
+    },
+    ('themes/es-theme-canica/README.md',
+     'c33775f5eb7e18fed9f7dee6a506c1ffffd23476cbcfdc208c232ff305903b82'): {
+        '1acd949b55259b54399d41d64bc4a1828de7120acf3bcaa12632011d60945631',
+        '20b609bb34f7975494483d7b94e855043d96821126d1b25317a546f2ec36d27a',
+        '32bf92075794123dc9c73349a46a93c0ad3958a6e8d57f50ebd6008d023adce3',
+        '403305aa227666b4b589cd0e6bcfcae6fd2cefc0c27c12a0f5f82a445df69766',
+        '7080f0ecdc7a1ab968b5159eeb2efdfa792fbc5ee81da43e446178824f25e398',
+        'ffdc7da73ac53f78922b132c9428d2155f08093fbbf5c1307003bcb17a46deea',
+    },
     # RC30 upgrades from sealed earlier kits.
     ('system/canica/SHA256SUMS',
      '2b311fdffadd2e464101d2bbf40cc4fc2548f1aa62bc239bac68a3dcbf050107'): {
