@@ -6,7 +6,7 @@ Browse by console, watch a game inside its card, and pick up from a save you rec
 
 The selected card plays the Neo Geo run-and-gun in the library.
 
-[Install Canica RC30](docs/canica-rg35xx-h.md) · [Watch all the demos](docs/canica-en-accion.md) · [Bring your own ROMs](docs/canica-rg35xx-h.md#bring-your-own-roms) · [My RomM and TV setup](docs/canica-rg35xx-h.md#from-the-handheld-to-a-tv-with-romm)
+[Install Canica RC30.1](docs/canica-rg35xx-h.md) · [Watch all the demos](docs/canica-en-accion.md) · [Bring your own ROMs](docs/canica-rg35xx-h.md#bring-your-own-roms) · [My RomM and TV setup](docs/canica-rg35xx-h.md#from-the-handheld-to-a-tv-with-romm)
 
 ## From Game Boy Advance to the arcade
 
@@ -44,7 +44,7 @@ I sync my handheld library and saves with RomM. My custom TV launchers include a
 
 ## What you need
 
-Canica RC30 pairs the May 11, 2026 KNULLI Scarab image for the **RG35XX H** with my EmulationStation fork, save adapter and theme. Get the theme kit separately. The theme and its artwork are licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), and the scripts that generate them under the MIT License; the notices packaged in RC30 predate this choice. The public installer accepts that kit. The guide covers setup, controls and how to restore the original menu. [Install and verify](docs/canica-rg35xx-h.md) · [Build the frontend](tools/canica/README.md)
+Canica RC30.1 pairs the May 11, 2026 KNULLI Scarab image for the **RG35XX H** with my EmulationStation fork, save adapter and theme. Get the theme kit separately. The theme and its artwork are licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), and the project's own code under the MIT License; the kit includes both texts. The public installer accepts that kit. The guide covers setup, controls and how to restore the original menu. [Install and verify](docs/canica-rg35xx-h.md) · [Build the frontend](tools/canica/README.md)
 
 This firmware fork carries the H700 integration and save adapter. The [frontend fork](https://github.com/eduarbo/batocera-emulationstation) implements the cards, navigation and search. The [build tools](https://github.com/eduarbo/knulli-console-bundles) provide the ARM64 build and recovery scripts. At `ff02e3d` the firmware had nine commits beyond Scarab, covering suspend, battery, DraStic, per-game settings and Wi-Fi. At integration revision `f6a4e9e`, the difference was 12 commits across 18 files. [Pinned firmware comparison](https://github.com/eduarbo/knulli-linux/compare/c1c7de479e56691c6665723046d9f25500e5ee74...f6a4e9ed39c6cc49c6f5eecbcf08c22a6020ff3a) · [Integration PR](https://github.com/eduarbo/knulli-linux/pull/1)
 
